@@ -262,15 +262,14 @@ body {
     font-weight: 600;
 }
 
-/* Phone icon emoji styling */
-.phone-icon-text {
-    font-size: 1.75rem;
-    display: inline-block;
-    margin-right: 0.75rem;
-    transition: var(--transition);
+/* Phone icon SVG styling for mobile nav */
+.phone-icon-mobile {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
     flex-shrink: 0;
-    line-height: 1;
-    vertical-align: middle;
+    transition: var(--transition);
+    display: inline-block;
 }
 
 .mobile-nav-phone:hover {
@@ -283,8 +282,8 @@ body {
     color: white !important;
 }
 
-/* Ring animation for emoji icon on hover */
-.mobile-nav-phone:hover .phone-icon-text {
+/* Ring animation for phone icon on hover */
+.mobile-nav-phone:hover .phone-icon-mobile {
     animation: ring 0.6s ease-in-out infinite;
 }
 
