@@ -57,6 +57,8 @@
     <link rel="stylesheet" href="styles.css">
     <!-- hCaptcha Script -->
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -304,12 +306,12 @@
                 </div>
 
                 <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Imię" required>
-                    <input type="email" placeholder="E-mail" required>
-                    <input type="tel" placeholder="Telefon">
-                    <input type="text" placeholder="Adres">
-                    <input type="text" placeholder="Temat" required>
-                    <textarea placeholder="Wiadomość" rows="5" required></textarea>
+                    <input type="text" name="user_name" placeholder="Imię" required>
+                    <input type="email" name="user_email" placeholder="E-mail" required>
+                    <input type="tel" name="user_phone" placeholder="Telefon">
+                    <input type="text" name="user_address" placeholder="Adres">
+                    <input type="text" name="subject" placeholder="Temat" required>
+                    <textarea name="message" placeholder="Wiadomość" rows="5" required></textarea>
                     <!-- hCaptcha Widget -->
                     <div class="h-captcha" data-sitekey="50000000-0000-0000-0000-000000000001" data-size="normal"></div>
                     <button type="submit" class="cta-button">Wyślij</button>

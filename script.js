@@ -131,16 +131,34 @@ function initHoverEffects() {
 
 initHoverEffects();
 
+// ===== EMAIL.JS INITIALIZATION =====
+/**
+ * Inicjalizuje EmailJS dla wysyłania emaili z formularza kontaktowego
+ * 
+ * INSTRUKCJA KONFIGURACJI:
+ * 1. Utwórz bezpłatne konto na https://emailjs.com
+ * 2. Skopiuj swój Public Key z ustawień
+ * 3. Zastąp poniższy klucz swoim Public Key
+ * 4. Skonfiguruj Email Service i Template w EmailJS dashboard
+ * 5. Zaktualizuj service_feniks_contact i template_feniks_form
+ * 
+ * Konfiguracja EmailJS:
+ * - Service Name: Gmail/Outlook/Custom (gmail_service)
+ * - Template Name: feniks_contact_form
+ * - Template Variables: user_name, user_email, user_phone, user_address, subject, message
+ */
+emailjs.init("nJ5sH5Yz_HhR7t1X5");  // ZAMIEŃ NA SWÓJ PUBLIC KEY
+
 // ===== FORM SUBMISSION =====
 /**
- * Obsługuje wysyłanie formularza kontaktowego
- * Zbiera dane i wyświetla potwierdzenie
- * Waliduje CAPTCHA przed wysłaniem
+ * Obsługuje wysyłanie formularza kontaktowego poprzez EmailJS
+ * Zbiera dane, waliduje CAPTCHA i wysyła email
+ * Obsługuje success/error notifications
  */
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             // Sprawdzenie CAPTCHA
@@ -150,22 +168,44 @@ function initContactForm() {
                 return;
             }
             
-            const data = {
-                name: contactForm.querySelector('input[placeholder="Imię"]').value,
-                email: contactForm.querySelector('input[placeholder="E-mail"]').value,
-                phone: contactForm.querySelector('input[placeholder="Telefon"]').value,
-                address: contactForm.querySelector('input[placeholder="Adres"]').value,
-                subject: contactForm.querySelector('input[placeholder="Temat"]').value,
-                message: contactForm.querySelector('textarea').value,
-                captcha: captchaResponse
-            };
-
-            console.log('Wiadomość do wysłania:', data);
-            showNotification('Dziękujemy za przesłanie wiadomości! Wkrótce się skontaktujemy.', 'success');
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Wysyłanie...';
             
-            // Reset formularza i CAPTCHA
-            contactForm.reset();
-            hcaptcha.reset();
+            try {
+                // Przygotuj dane dla EmailJS
+                const templateParams = {
+                    user_name: contactForm.querySelector('input[name="user_name"]').value,
+                    user_email: contactForm.querySelector('input[name="user_email"]').value,
+                    user_phone: contactForm.querySelector('input[name="user_phone"]').value,
+                    user_address: contactForm.querySelector('input[name="user_address"]').value,
+                    subject: contactForm.querySelector('input[name="subject"]').value,
+                    message: contactForm.querySelector('textarea[name="message"]').value,
+                    captcha_token: captchaResponse
+                };
+                
+                // Wyślij email
+                const response = await emailjs.send(
+                    'service_feniks_contact',  // Service ID
+                    'template_feniks_form',     // Template ID
+                    templateParams
+                );
+                
+                console.log('Email wysłany pomyślnie:', response);
+                showNotification('✓ Dziękujemy za przesłanie wiadomości! Wkrótce się skontaktujemy.', 'success');
+                
+                // Reset formularza i CAPTCHA
+                contactForm.reset();
+                hcaptcha.reset();
+                
+            } catch (error) {
+                console.error('Błąd wysyłania emailu:', error);
+                showNotification('Błąd wysyłania wiadomości. Spróbuj później lub skontaktuj się bezpośrednio: 663 335 998', 'info');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
         });
     }
 }
