@@ -129,6 +129,7 @@ initHoverEffects();
 /**
  * Obsługuje wysyłanie formularza kontaktowego
  * Zbiera dane i wyświetla potwierdzenie
+ * Waliduje CAPTCHA przed wysłaniem
  */
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
@@ -136,18 +137,29 @@ function initContactForm() {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            // Sprawdzenie CAPTCHA
+            const captchaResponse = hcaptcha.getResponse();
+            if (!captchaResponse) {
+                showNotification('Proszę potwierdź CAPTCHA', 'info');
+                return;
+            }
+            
             const data = {
                 name: contactForm.querySelector('input[placeholder="Imię"]').value,
                 email: contactForm.querySelector('input[placeholder="E-mail"]').value,
                 phone: contactForm.querySelector('input[placeholder="Telefon"]').value,
                 address: contactForm.querySelector('input[placeholder="Adres"]').value,
                 subject: contactForm.querySelector('input[placeholder="Temat"]').value,
-                message: contactForm.querySelector('textarea').value
+                message: contactForm.querySelector('textarea').value,
+                captcha: captchaResponse
             };
 
             console.log('Wiadomość do wysłania:', data);
             showNotification('Dziękujemy za przesłanie wiadomości! Wkrótce się skontaktujemy.', 'success');
+            
+            // Reset formularza i CAPTCHA
             contactForm.reset();
+            hcaptcha.reset();
         });
     }
 }
