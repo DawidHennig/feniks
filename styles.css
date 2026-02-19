@@ -258,14 +258,28 @@ body {
 /* ===== HERO SECTION ===== */
 .hero {
     background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     padding: 80px 20px;
     text-align: center;
-    min-height: 60vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+}
+
+.hero-overlay {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(26, 26, 26, 0.9) 100%);
+    z-index: 1;
 }
 
 .hero::before {
@@ -278,6 +292,7 @@ body {
     background: rgba(220, 38, 38, 0.1);
     border-radius: 50%;
     animation: float 6s ease-in-out infinite;
+    z-index: 1;
 }
 
 .hero::after {
@@ -290,6 +305,7 @@ body {
     background: rgba(220, 38, 38, 0.05);
     border-radius: 50%;
     animation: float 8s ease-in-out infinite reverse;
+    z-index: 1;
 }
 
 .hero-content {
@@ -312,8 +328,15 @@ body {
     font-size: clamp(1.2rem, 3vw, 2rem);
     color: var(--accent-red);
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     letter-spacing: 2px;
+}
+
+.hero-cta-group {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* ===== CTA BUTTON ===== */
@@ -340,6 +363,23 @@ body {
 
 .cta-button:active {
     transform: translateY(-1px);
+}
+
+.cta-primary {
+    background-color: var(--accent-red);
+    color: var(--white);
+}
+
+.cta-secondary {
+    background-color: transparent;
+    color: var(--accent-red);
+    border: 2px solid var(--accent-red);
+}
+
+.cta-secondary:hover {
+    background-color: var(--accent-red);
+    color: var(--white);
+    border-color: var(--accent-red-hover);
 }
 
 /* ===== SEKCJE ===== */
@@ -788,6 +828,15 @@ section {
         min-height: 50vh;
     }
 
+    .hero-cta-group {
+        gap: 1rem;
+    }
+
+    .cta-button {
+        padding: 10px 24px;
+        font-size: 0.95rem;
+    }
+
     section {
         padding: 40px 20px;
     }
@@ -828,9 +877,15 @@ section {
         font-size: 1rem;
     }
 
+    .hero-cta-group {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
     .cta-button {
         padding: 10px 24px;
         font-size: 0.9rem;
+        width: 100%;
     }
 
     .section-title {
