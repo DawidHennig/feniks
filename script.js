@@ -149,10 +149,95 @@ initHoverEffects();
  */
 emailjs.init("nJ5sH5Yz_HhR7t1X5");  // ZAMIEŃ NA SWÓJ PUBLIC KEY
 
+// ===== FORM VALIDATION =====
+/**
+ * Waliduje pola formularza z feedback'iem w real-time
+ * Obsługuje: email, telefon, wymagane pola
+ */
+function initFormValidation() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+    
+    const inputs = contactForm.querySelectorAll('input, textarea');
+    
+    // Walidacja na blur (opuszczenie pola)
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => validateField(input));
+        input.addEventListener('input', () => {
+            if (input.classList.contains('invalid')) {
+                validateField(input);
+            }
+        });
+    });
+}
+
+function validateField(field) {
+    const fieldName = field.name;
+    const value = field.value.trim();
+    const errorElement = document.querySelector(`.form-error[data-field="${fieldName}"]`);
+    let isValid = true;
+    let errorMessage = '';
+    
+    // Walidacja wymaganych pól
+    if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        errorMessage = 'To pole jest wymagane';
+    }
+    // Walidacja emaila
+    else if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            isValid = false;
+            errorMessage = 'Podaj prawidłowy adres e-mail';
+        }
+    }
+    // Walidacja telefonu (jeśli wypełniony)
+    else if (field.type === 'tel' && value) {
+        const phoneRegex = /^[\d\s\-\+\(\)]{9,}$/;
+        if (!phoneRegex.test(value)) {
+            isValid = false;
+            errorMessage = 'Podaj prawidłowy numer telefonu';
+        }
+    }
+    
+    // Aktualizuj klasy i komunikaty
+    field.classList.remove('invalid', 'valid');
+    if (errorElement) {
+        errorElement.classList.remove('show');
+    }
+    
+    if (!isValid) {
+        field.classList.add('invalid');
+        if (errorElement) {
+            errorElement.textContent = errorMessage;
+            errorElement.classList.add('show');
+        }
+    } else if (value) {
+        field.classList.add('valid');
+    }
+    
+    return isValid;
+}
+
+function validateForm(form) {
+    const inputs = form.querySelectorAll('input[required], textarea[required], input[type="email"]');
+    let isFormValid = true;
+    
+    inputs.forEach(input => {
+        if (!validateField(input)) {
+            isFormValid = false;
+        }
+    });
+    
+    return isFormValid;
+}
+
+initFormValidation();
+
 // ===== FORM SUBMISSION =====
 /**
  * Obsługuje wysyłanie formularza kontaktowego poprzez EmailJS
- * Zbiera dane, waliduje CAPTCHA i wysyła email
+ * Zbiera dane, waliduje pola, CAPTCHA i wysyła email
  * Obsługuje success/error notifications
  */
 function initContactForm() {
@@ -160,6 +245,12 @@ function initContactForm() {
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            // Waliduj wszystkie pola
+            if (!validateForm(contactForm)) {
+                showNotification('Sprawdź czy wszystkie pola są prawidłowo wypełnione', 'info');
+                return;
+            }
             
             // Sprawdzenie CAPTCHA
             const captchaResponse = hcaptcha.getResponse();
@@ -198,6 +289,9 @@ function initContactForm() {
                 // Reset formularza i CAPTCHA
                 contactForm.reset();
                 hcaptcha.reset();
+                contactForm.querySelectorAll('input, textarea').forEach(field => {
+                    field.classList.remove('valid', 'invalid');
+                });
                 
             } catch (error) {
                 console.error('Błąd wysyłania emailu:', error);

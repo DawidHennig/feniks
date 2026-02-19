@@ -305,13 +305,31 @@
                     </div>
                 </div>
 
-                <form class="contact-form" id="contactForm">
-                    <input type="text" name="user_name" placeholder="Imię" required>
-                    <input type="email" name="user_email" placeholder="E-mail" required>
-                    <input type="tel" name="user_phone" placeholder="Telefon">
-                    <input type="text" name="user_address" placeholder="Adres">
-                    <input type="text" name="subject" placeholder="Temat" required>
-                    <textarea name="message" placeholder="Wiadomość" rows="5" required></textarea>
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-group">
+                        <input type="text" name="user_name" placeholder="Imię *" required>
+                        <span class="form-error" data-field="user_name"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="user_email" placeholder="E-mail *" required>
+                        <span class="form-error" data-field="user_email"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="user_phone" placeholder="Telefon">
+                        <span class="form-error" data-field="user_phone"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="user_address" placeholder="Adres">
+                        <span class="form-error" data-field="user_address"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Temat *" required>
+                        <span class="form-error" data-field="subject"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Wiadomość *" rows="5" required></textarea>
+                        <span class="form-error" data-field="message"></span>
+                    </div>
                     <!-- hCaptcha Widget -->
                     <div class="h-captcha" data-sitekey="50000000-0000-0000-0000-000000000001" data-size="normal"></div>
                     <button type="submit" class="cta-button">Wyślij</button>
