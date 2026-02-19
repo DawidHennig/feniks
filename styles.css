@@ -102,7 +102,10 @@ body {
     flex: 0 0 auto;
 }
 
-.phone a {
+.phone-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--accent-red);
     text-decoration: none;
     font-weight: 600;
@@ -110,9 +113,24 @@ body {
     transition: var(--transition);
 }
 
-.phone a:hover {
+.phone-icon {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    transition: var(--transition);
+}
+
+.phone-text {
+    display: inline;
+}
+
+.phone-link:hover {
     color: var(--accent-red-hover);
     transform: scale(1.05);
+}
+
+.phone-link:hover .phone-icon {
+    animation: ring 0.6s ease-in-out infinite;
 }
 
 /* ===== MOBILE MENU TOGGLE - LADDER ICON ===== */
@@ -223,6 +241,15 @@ body {
     font-weight: 600;
     background-color: rgba(220, 38, 38, 0.05);
     border-top: 2px solid var(--accent-red);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.phone-icon-small {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
 }
 
 /* ===== HERO SECTION ===== */
@@ -582,6 +609,27 @@ section {
 }
 
 /* ===== ANIMACJE ===== */
+@keyframes ring {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(-15deg);
+    }
+    20% {
+        transform: rotate(15deg);
+    }
+    30% {
+        transform: rotate(-15deg);
+    }
+    40% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+}
+
 @keyframes fadeInDown {
     from {
         opacity: 0;
