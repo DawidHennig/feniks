@@ -229,50 +229,7 @@ section {
     border-radius: 2px;
 }
 
-/* ===== MAIN SERVICES SECTION ===== */
-.main-services {
-    background-color: var(--secondary-black);
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.service-card {
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(10, 10, 10, 0.8) 100%);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 2px solid rgba(220, 38, 38, 0.2);
-    transition: var(--transition);
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.service-card:hover {
-    border-color: var(--accent-red);
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(220, 38, 38, 0.2);
-}
-
-.service-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    display: inline-block;
-}
-
-.service-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--white);
-}
-
-.service-card p {
-    color: var(--dark-gray);
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
+/* ===== MAIN SERVICES SECTION - REMOVED ===== */
 
 /* ===== FULL SERVICES SECTION ===== */
 .full-services {
@@ -283,6 +240,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
+    overflow: visible;
 }
 
 .service-item {
@@ -294,12 +252,18 @@ section {
     transition: var(--transition);
     cursor: pointer;
     animation: fadeInUp 0.6s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    position: relative;
+    overflow: hidden;
 }
 
 .service-item:hover {
     border-color: var(--accent-red);
     background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(26, 26, 26, 0.8) 100%);
-    transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(220, 38, 38, 0.15);
 }
 
@@ -307,12 +271,25 @@ section {
     font-size: 2rem;
     margin-bottom: 0.5rem;
     display: block;
+    transition: var(--transition);
 }
 
 .service-item h4 {
     font-size: 1rem;
     font-weight: 600;
     color: var(--white);
+    margin: 0;
+    transition: var(--transition);
+    position: relative;
+    z-index: 2;
+}
+
+.service-item p {
+    font-size: 0.85rem;
+    color: var(--dark-gray);
+    line-height: 1.5;
+    margin: 0;
+    display: none;
 }
 
 /* ===== TESTIMONIALS SECTION ===== */
@@ -509,7 +486,6 @@ section {
         padding: 40px 20px;
     }
 
-    .services-grid,
     .services-catalog {
         grid-template-columns: 1fr;
     }
@@ -519,7 +495,6 @@ section {
         gap: 2rem;
     }
 
-    .service-card,
     .service-item,
     .testimonial-card {
         animation: fadeInUp 0.6s ease-out;
@@ -558,5 +533,95 @@ section {
 
     .testimonial-text {
         font-size: 1.2rem;
+    }
+}
+
+/* ===== SERVICE MODAL/LIGHTBOX ===== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.modal-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, var(--secondary-black) 0%, rgba(26, 26, 26, 0.6) 100%);
+    border: 2px solid var(--accent-red);
+    border-radius: 12px;
+    padding: 3rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(220, 38, 38, 0.3);
+    animation: slideInUp 0.4s ease-out;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: var(--accent-red-hover);
+    transform: rotate(90deg);
+}
+
+.modal-service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.modal-service-title {
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.modal-service-description {
+    font-size: 1rem;
+    color: var(--dark-gray);
+    line-height: 1.8;
+    margin: 0;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
