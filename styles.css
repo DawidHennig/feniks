@@ -243,25 +243,34 @@ body {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 0.75rem !important;
+    gap: 1rem !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    padding: 1rem 20px !important;
+    padding: 1.25rem 20px !important;
     margin-top: 0.5rem !important;
     text-decoration: none !important;
     white-space: nowrap !important;
+    min-height: 50px !important;
 }
 
 .mobile-nav-phone span {
     display: inline;
     color: inherit;
+    white-space: nowrap;
+}
+
+.mobile-nav-phone span.phone-text {
+    font-weight: 600;
 }
 
 /* Phone icon emoji styling */
 .phone-icon-text {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     display: inline-block;
+    margin-right: 0.75rem;
     transition: var(--transition);
     flex-shrink: 0;
+    line-height: 1;
+    vertical-align: middle;
 }
 
 .mobile-nav-phone:hover {
