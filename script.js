@@ -7,8 +7,14 @@ function initMobileMenu() {
     const mobileNav = document.getElementById('mobileNav');
     const mainNav = document.getElementById('mainNav');
     
+    if (!toggle) {
+        console.log('Mobile menu toggle not found');
+        return;
+    }
+    
     // Toggle menu
     toggle.addEventListener('click', () => {
+        console.log('Toggle clicked, adding active class');
         toggle.classList.toggle('active');
         mobileNav.classList.toggle('active');
     });

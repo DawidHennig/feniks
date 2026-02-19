@@ -180,25 +180,28 @@ body {
     width: 12px;
 }
 
-/* Animation when menu is active - drabina się robi */
+/* Animation when menu is active - drabina się robi X */
 .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
+    transform: rotate(45deg) translate(11px, 11px);
     width: 28px;
+    opacity: 1;
 }
 
 .mobile-menu-toggle.active span:nth-child(2) {
-    transform: rotate(45deg) translate(4px, 4px);
+    transform: rotate(-45deg) translate(-6px, 6px);
     width: 20px;
+    opacity: 1;
 }
 
 .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(45deg) translate(0px, 0px);
-    width: 12px;
+    transform: rotate(45deg) translate(11px, 11px);
+    width: 16px;
+    opacity: 0;
 }
 
 .mobile-menu-toggle.active span:nth-child(4) {
     opacity: 0;
-    transform: rotate(45deg) translate(-4px, -4px);
+    transform: rotate(-45deg) translate(-6px, 6px);
 }
 
 /* ===== MOBILE NAVIGATION ===== */
