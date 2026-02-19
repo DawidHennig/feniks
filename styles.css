@@ -221,7 +221,7 @@ body {
 }
 
 .mobile-nav.active {
-    max-height: 450px;
+    max-height: 350px;
 }
 
 .mobile-nav-link {
