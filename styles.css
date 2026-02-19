@@ -221,7 +221,7 @@ body {
 }
 
 .mobile-nav.active {
-    max-height: 350px;
+    max-height: 380px;
 }
 
 .mobile-nav-link {
@@ -242,16 +242,20 @@ body {
 .mobile-nav-phone {
     color: var(--accent-red);
     font-weight: 600;
-    background-color: rgba(220, 38, 38, 0.05);
+    background-color: rgba(220, 38, 38, 0.1);
     border-top: 2px solid var(--accent-red);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 0.75rem;
     transition: var(--transition);
+    padding: 1rem 20px !important;
+    margin-top: 0.5rem;
 }
 
 .mobile-nav-phone:hover {
-    background-color: rgba(220, 38, 38, 0.15);
+    background-color: var(--accent-red);
+    color: var(--white);
     transform: scale(1.02);
 }
 
@@ -260,8 +264,8 @@ body {
 }
 
 .phone-icon-small {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     stroke: currentColor;
     transition: var(--transition);
 }
