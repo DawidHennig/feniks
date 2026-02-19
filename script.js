@@ -1,3 +1,37 @@
+// ===== MOBILE MENU TOGGLE =====
+/**
+ * Obsługuje otwarcie/zamknięcie hamburger menu na mobilnych
+ */
+function initMobileMenu() {
+    const toggle = document.getElementById('mobileMenuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const mainNav = document.getElementById('mainNav');
+    
+    // Toggle menu
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+    });
+    
+    // Zamknij menu przy kliknięciu na link
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            toggle.classList.remove('active');
+            mobileNav.classList.remove('active');
+        });
+    });
+    
+    // Zamknij menu przy resize na desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            toggle.classList.remove('active');
+            mobileNav.classList.remove('active');
+        }
+    });
+}
+
+initMobileMenu();
+
 // ===== NOTIFICATION SYSTEM =====
 /**
  * System powiadomień - wyświetla notyfikacje na dole ekranu

@@ -3,6 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FENIKS Ochrona Przeciwpożarowa - profesjonalne zabezpieczenia pożarowe, systemy detekcji, szkolenia BHP i usługi bezpieczeństwa dla firm w Poznaniu i okolicy.">
+    <meta name="keywords" content="ochrona pożarowa, systemy detekcji, szkolenia BHP, sygnalizacja pożaru, hydranty, oświetlenie awaryjne, bezpieczeństwo, Poznań, Pniewy">
+    <meta name="author" content="FENIKS Ochrona Przeciwpożarowa">
+    <meta name="theme-color" content="#dc2626">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="FENIKS OCHRONA PRZECIWPOŻAROWA | Profesjonalne Zabezpieczenia">
+    <meta property="og:description" content="Kompleksowe usługi ochrony pożarowej, systemy detekcji, szkolenia i konsultacje bezpieczeństwa dla Twojej firmy.">
+    <meta property="og:type" content="business.business">
+    <meta property="og:url" content="https://feniks-ochrona.pl/">
+    <meta property="og:image" content="https://static.wixstatic.com/media/ab4ef5_d52d27356c91451aac217128dcc7dc8f~mv2.png/v1/fill/w_391,h_145,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FENIKS OCHRONA PRZECIWPOŻAROWA">
+    <meta name="twitter:description" content="Kompleksowe usługi ochrony pożarowej i bezpieczeństwa dla firm">
+    <meta name="twitter:image" content="https://static.wixstatic.com/media/ab4ef5_d52d27356c91451aac217128dcc7dc8f~mv2.png/v1/fill/w_391,h_145,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://feniks-ochrona.pl/">
+    
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "FENIKS Ochrona Przeciwpożarowa",
+      "image": "https://static.wixstatic.com/media/ab4ef5_d52d27356c91451aac217128dcc7dc8f~mv2.png/v1/fill/w_391,h_145,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO.png",
+      "description": "Profesjonalne usługi ochrony pożarowej i zabezpieczenia dla firm",
+      "url": "https://feniks-ochrona.pl/",
+      "telephone": "+48 663 335 998",
+      "email": "feniks.kontakt@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Turowska 10",
+        "addressLocality": "Pniewy",
+        "postalCode": "62-045",
+        "addressCountry": "PL"
+      },
+      "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "17:00"
+      }
+    }
+    </script>
+    
     <title>FENIKS OCHRONA PRZECIWPOŻAROWA | Zabezpieczenia Przeciwpożarowe</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,7 +63,7 @@
             <div class="logo-section">
                 <img src="https://static.wixstatic.com/media/ab4ef5_d52d27356c91451aac217128dcc7dc8f~mv2.png/v1/fill/w_391,h_145,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO.png" alt="FENIKS LOGO" class="logo">
             </div>
-            <nav class="nav">
+            <nav class="nav" id="mainNav">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#uslugi" class="nav-link">Usługi</a>
                 <a href="#rezerwacja" class="nav-link">Rezerwacja</a>
@@ -22,7 +72,21 @@
             <div class="phone">
                 <a href="tel:663335998">663 335 998</a>
             </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#home" class="mobile-nav-link">Home</a>
+            <a href="#uslugi" class="mobile-nav-link">Usługi</a>
+            <a href="#rezerwacja" class="mobile-nav-link">Rezerwacja</a>
+            <a href="#kontakt" class="mobile-nav-link">Kontakt</a>
+            <a href="tel:663335998" class="mobile-nav-link mobile-nav-phone">Zadzwoń: 663 335 998</a>
+        </nav>
     </header>
 
     <!-- Hero Section -->
