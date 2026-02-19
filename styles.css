@@ -152,8 +152,8 @@ body {
     opacity: 0.8;
 }
 
-/* House icon - shown when menu is closed */
-.icon-house {
+/* Ladder icon - shown when menu is closed (default state) */
+.icon-ladder {
     width: 28px;
     height: 28px;
     stroke: var(--white);
@@ -163,8 +163,8 @@ body {
     transform: scale(1) rotate(0deg);
 }
 
-/* Ladder icon - shown when menu is open */
-.icon-ladder {
+/* House icon - shown when menu is open (active state) */
+.icon-house {
     width: 28px;
     height: 28px;
     stroke: var(--white);
@@ -175,12 +175,12 @@ body {
 }
 
 /* When menu is active - swap icons */
-.mobile-menu-toggle.active .icon-house {
+.mobile-menu-toggle.active .icon-ladder {
     opacity: 0;
     transform: scale(0.8) rotate(90deg);
 }
 
-.mobile-menu-toggle.active .icon-ladder {
+.mobile-menu-toggle.active .icon-house {
     opacity: 1;
     transform: scale(1) rotate(0deg);
 }
