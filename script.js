@@ -116,7 +116,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.service-item, .testimonial-card, .portfolio-card').forEach(element => {
+document.querySelectorAll('.service-item, .testimonial-card, .portfolio-card, .stat-card, .team-member, .value-card').forEach(element => {
     element.classList.add('scroll-animate');
     scrollObserver.observe(element);
 });
