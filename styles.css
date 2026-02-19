@@ -140,71 +140,49 @@ body {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    flex-direction: column;
-    gap: 8px;
     width: 40px;
-    height: auto;
+    height: 40px;
     align-items: center;
     justify-content: center;
     transition: var(--transition);
+    position: relative;
 }
 
 .mobile-menu-toggle:hover {
     opacity: 0.8;
 }
 
-.mobile-menu-toggle span {
-    width: 24px;
-    height: 3px;
-    background-color: var(--white);
-    border-radius: 1.5px;
-    transition: var(--transition);
-    position: relative;
-    display: block;
+/* House icon - shown when menu is closed */
+.icon-house {
+    width: 28px;
+    height: 28px;
+    stroke: var(--white);
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(1) rotate(0deg);
 }
 
-/* Domek shape - linie na kształt domu (zamknięte menu) */
-.mobile-menu-toggle span:nth-child(1) {
-    width: 24px;
-}
-
-.mobile-menu-toggle span:nth-child(2) {
-    width: 0;
+/* Ladder icon - shown when menu is open */
+.icon-ladder {
+    width: 28px;
+    height: 28px;
+    stroke: var(--white);
+    position: absolute;
     opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.8) rotate(-90deg);
 }
 
-.mobile-menu-toggle span:nth-child(3) {
-    width: 0;
+/* When menu is active - swap icons */
+.mobile-menu-toggle.active .icon-house {
     opacity: 0;
+    transform: scale(0.8) rotate(90deg);
 }
 
-.mobile-menu-toggle span:nth-child(4) {
-    width: 24px;
-}
-
-/* Animation when menu is active - pokazuj drabinę */
-.mobile-menu-toggle.active span:nth-child(1) {
-    width: 24px;
+.mobile-menu-toggle.active .icon-ladder {
     opacity: 1;
-    transform: none;
-}
-
-.mobile-menu-toggle.active span:nth-child(2) {
-    width: 20px;
-    opacity: 1;
-    transform: none;
-}
-
-.mobile-menu-toggle.active span:nth-child(3) {
-    width: 16px;
-    opacity: 1;
-    transform: none;
-}
-
-.mobile-menu-toggle.active span:nth-child(4) {
-    width: 12px;
-    opacity: 1;
-    transform: none;
+    transform: scale(1) rotate(0deg);
 }
 
 /* ===== MOBILE NAVIGATION ===== */
