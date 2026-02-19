@@ -241,15 +241,16 @@ body {
     border-top: 2px solid #dc2626 !important;
     border-bottom: none !important;
     display: flex !important;
+    flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 1rem !important;
+    gap: 0.75rem !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    padding: 1.25rem 20px !important;
+    padding: 1.5rem 20px !important;
     margin-top: 0.5rem !important;
     text-decoration: none !important;
-    white-space: nowrap !important;
-    min-height: 50px !important;
+    min-height: 80px !important;
+    text-align: center !important;
 }
 
 .mobile-nav-phone span {
