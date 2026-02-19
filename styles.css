@@ -256,6 +256,14 @@ body {
     color: inherit;
 }
 
+/* Phone icon emoji styling */
+.phone-icon-text {
+    font-size: 1.25rem;
+    display: inline-block;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
 .mobile-nav-phone:hover {
     background-color: #dc2626 !important;
     color: white !important;
@@ -266,31 +274,9 @@ body {
     color: white !important;
 }
 
-.mobile-nav-phone:hover .phone-icon-small {
+/* Ring animation for emoji icon on hover */
+.mobile-nav-phone:hover .phone-icon-text {
     animation: ring 0.6s ease-in-out infinite;
-    stroke: white !important;
-}
-
-.phone-icon-small {
-    width: 20px;
-    height: 20px;
-    stroke: currentColor;
-    transition: var(--transition);
-    flex-shrink: 0;
-}
-
-.mobile-nav-phone:hover {
-    background-color: var(--accent-red) !important;
-    color: var(--white) !important;
-    transform: scale(1.02);
-}
-
-.mobile-nav-phone:hover .phone-icon-small {
-    animation: ring 0.6s ease-in-out infinite;
-}
-
-.mobile-nav-phone:hover .phone-icon-small {
-    stroke: var(--white);
 }
 
 /* ===== HERO SECTION ===== */
