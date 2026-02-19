@@ -180,28 +180,29 @@ body {
     width: 12px;
 }
 
-/* Animation when menu is active - drabina się robi X */
+/* Animation when menu is active - drabina się składa */
+/* Pierwsza linia (gorna) */
 .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(11px, 11px);
-    width: 28px;
-    opacity: 1;
+    transform: rotate(45deg) translateY(18px) translateX(2px);
+    width: 24px;
 }
 
+/* Druga linia */
 .mobile-menu-toggle.active span:nth-child(2) {
-    transform: rotate(-45deg) translate(-6px, 6px);
+    transform: rotate(-45deg) translateY(-18px) translateX(-2px);
     width: 20px;
-    opacity: 1;
 }
 
+/* Trzecia linia - znika */
 .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(45deg) translate(11px, 11px);
-    width: 16px;
     opacity: 0;
+    transform: scaleX(0);
 }
 
+/* Czwarta linia - znika */
 .mobile-menu-toggle.active span:nth-child(4) {
     opacity: 0;
-    transform: rotate(-45deg) translate(-6px, 6px);
+    transform: scaleX(0);
 }
 
 /* ===== MOBILE NAVIGATION ===== */
