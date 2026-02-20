@@ -100,7 +100,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===== SCROLL ANIMATIONS =====
 /**
  * Obserwuje elementy i dodaje animacji gdy wjeżdżają w viewport
- * Obsługuje: service-card, service-item, testimonial-card
+ * Obsługuje: service-card, service-item, portfolio-card
  */
 const observerOptions = {
     threshold: 0.1,
@@ -116,7 +116,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.service-item, .testimonial-card, .portfolio-card, .stat-card, .team-member, .value-card').forEach(element => {
+document.querySelectorAll('.service-item, .portfolio-card, .stat-card, .team-member, .value-card').forEach(element => {
     element.classList.add('scroll-animate');
     scrollObserver.observe(element);
 });
