@@ -252,13 +252,6 @@ function initContactForm() {
                 return;
             }
             
-            // Sprawdzenie CAPTCHA
-            const captchaResponse = hcaptcha.getResponse();
-            if (!captchaResponse) {
-                showNotification('Proszę potwierdź CAPTCHA', 'info');
-                return;
-            }
-            
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
@@ -272,8 +265,7 @@ function initContactForm() {
                     user_phone: contactForm.querySelector('input[name="user_phone"]').value,
                     user_address: contactForm.querySelector('input[name="user_address"]').value,
                     subject: contactForm.querySelector('input[name="subject"]').value,
-                    message: contactForm.querySelector('textarea[name="message"]').value,
-                    captcha_token: captchaResponse
+                    message: contactForm.querySelector('textarea[name="message"]').value
                 };
                 
                 // Wyślij email
@@ -286,9 +278,8 @@ function initContactForm() {
                 console.log('Email wysłany pomyślnie:', response);
                 showNotification('✓ Dziękujemy za przesłanie wiadomości! Wkrótce się skontaktujemy.', 'success');
                 
-                // Reset formularza i CAPTCHA
+                // Reset formularza
                 contactForm.reset();
-                hcaptcha.reset();
                 contactForm.querySelectorAll('input, textarea').forEach(field => {
                     field.classList.remove('valid', 'invalid');
                 });
