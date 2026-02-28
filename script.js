@@ -391,12 +391,35 @@ function initServiceModal() {
         item.addEventListener('click', function() {
             const icon = this.querySelector('.service-item-icon').textContent;
             const title = this.querySelector('h4').textContent;
-            const description = this.querySelector('p').textContent;
+            
+            // Zbierz całą zawartość (paragrafów i list)
+            let description = '';
+            const children = this.querySelectorAll('p, ul, li');
+            
+            // Jeśli są listy, rebuild je prawidłowo
+            let currentList = null;
+            children.forEach(el => {
+                if (el.tagName === 'P') {
+                    if (currentList) {
+                        description += currentList;
+                        currentList = null;
+                    }
+                    description += `<p>${el.innerHTML}</p>`;
+                } else if (el.tagName === 'UL') {
+                    const listItems = el.querySelectorAll('li');
+                    let listHTML = '<ul style="margin: 10px 0 0 20px; padding-left: 0;">';
+                    listItems.forEach(li => {
+                        listHTML += `<li>${li.textContent}</li>`;
+                    });
+                    listHTML += '</ul>';
+                    description += listHTML;
+                }
+            });
             
             modalBody.innerHTML = `
                 <div class="modal-service-icon">${icon}</div>
                 <h3 class="modal-service-title">${title}</h3>
-                <p class="modal-service-description">${description}</p>
+                <div class="modal-service-description">${description}</div>
             `;
             
             modal.classList.add('active');
