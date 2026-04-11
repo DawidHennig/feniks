@@ -8,6 +8,11 @@
     "serwis_systemu_gaszenia_gazem",
     "serwis_systemu_oddymiania",
     "sprzedaż_defibrylatorów",
-    "zabezpieczenie_tras_kablowych"
+    "zabezpieczenie_tras_kablowych",
+    "montaż_AED",
+    "sprzedaż_AED",
+    "sprzedaż_sprzętu",
+    "sprzedaż_i_serwis_sprzętu_ppoż",
+    "szkolenie_przeciwpożarowe"
   ]
 }
