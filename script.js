@@ -680,24 +680,18 @@ async function loadProjectImages(projectName) {
  */
 function tryDefaultNamingConventions(projectName) {
     const images = [];
-    const fileName = projectName.split('/').pop();
     
     // Spróbuj obu rozszerzeń: .jpeg i .jpg
-    const extensions = ['jpeg', 'jpg'];
+    const extensions = ['jpg', 'jpeg', 'png'];
     
-    // Próba 1: nazwa_projektu.jpeg / nazwa_projektu.jpg
-    for (const ext of extensions) {
-        images.push(`${fileName}.${ext}`);
-    }
-    
-    // Próba 2: nazwa_projektu_2.jpeg/jpg, nazwa_projektu_3.jpeg/jpg, itd.
-    for (let i = 2; i <= 20; i++) {
+    // Próba 1: image_1.jpg, image_2.jpg, itd (główny format)
+    for (let i = 1; i <= 20; i++) {
         for (const ext of extensions) {
-            images.push(`${fileName}_${i}.${ext}`);
+            images.push(`image_${i}.${ext}`);
         }
     }
     
-    // Próba 3: img1.jpeg/jpg, img2.jpeg/jpg, itd.
+    // Próba 2: img1.jpg, img2.jpg, itd (fallback)
     for (let i = 1; i <= 20; i++) {
         for (const ext of extensions) {
             images.push(`img${i}.${ext}`);
