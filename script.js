@@ -487,24 +487,24 @@ async function loadProjectsManifest() {
         // Fallback - jeśli manifest się nie ładuje, użyj hardcoded listy
         console.warn('[MANIFEST] Using fallback projects list');
         allProjects = [
-            'budowa_stropu_przeciwpożarowego',
-            'dostawa_montaż_serwis samoczynnych_urządzeń_gaśniczych',
-            'montaż_AED',
-            'montaz_klap_przeciwpożarowych',
+            'budowa_stropu_przeciwpozarowego',
+            'dostawa_montaz_serwis_samoczynnych_urzadzen_gasinczych',
+            'montaz_AED',
+            'montaz_klap_przeciwpozarowych',
             'montaz_oznakowania',
-            'montaż_systemu_detekcji_gazu',
-            'obsługa_dużych_inwestycji',
-            'przegląd_hydrantu',
+            'montaz_systemu_detekcji_gazu',
+            'obsluga_duzych_inwestycji',
+            'przeglad_hydrantu',
             'serwis_systemu_gaszenia_gazem',
             'serwis_systemu_oddymiania',
-            'sprzedaż_AED',
-            'sprzedaż_defibrylatorów',
-            'sprzedaż_i_serwis_sprzętu_ppoż',
-            'sprzedaż_sprzętu',
-            'szkolenie_przeciwpożarowe',
+            'sprzedaz_AED',
+            'sprzedaz_defibrylatrow',
+            'sprzedaz_i_serwis_sprzetu_ppoz',
+            'sprzedaz_sprzetu',
+            'szkolenie_przeciwpozarowe',
             'zabezpieczenie_tras_kablowych',
-            'zabudowa_przeciwpożarowa_głównego_zasilania_obiektu',
-            'zabudowa_przeciwpożarowa_w_ścianie_odporności_ogniowej'
+            'zabudowa_przeciwpozarowa_glownego_zasilania_obiektu',
+            'zabudowa_przeciwpozarowa_w_scianie_odpornosci_ogniowej'
         ];
         return allProjects;
     }
