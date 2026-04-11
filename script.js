@@ -598,66 +598,15 @@ function generatePortfolioCards() {
  * Mapa projektów do nazw plików zdjęć
  * Umożliwia elastyczną obsługę różnych konwencji nazewnictwa
  */
-const projectImagesMap = {
-    "budowa_stropu_przeciwpożarowego": ["PHOTO-2026-03-03-17-25-58.jpg"],
-    "montaz_klap_przeciwpożarowych": ["montaz_klap.jpeg"],
-    "montaz_oznakowania": ["montaz_oznakowania.jpeg", "motaz_oznakowania.jpeg"],
-    "montaż_AED": ["PHOTO-2026-03-03-17-35-54.jpg"],
-    "montaż_systemu_detekcji_gazu": ["PHOTO-2026-03-03-17-22-01.jpg"],
-    "obsługa_dużych_inwestycji": ["obsluga_duzych_inwestycji.jpeg"],
-    "serwis_systemu_gaszenia_gazem": ["serwis_systemu_gaszenia_gazem.jpeg"],
-    "serwis_systemu_oddymiania": ["PHOTO-2026-03-03-17-23-33.jpg"],
-    "sprzedaż_AED": ["PHOTO-2026-03-03-17-36-38.jpg"],
-    "sprzedaż_i_serwis_sprzętu_ppoż": ["PHOTO-2026-03-03-17-40-55.jpg"],
-    "sprzedaż_sprzętu": ["PHOTO-2026-03-03-17-40-27.jpg"],
-    "sprzedaż_defibrylatorów": ["PHOTO-2026-03-03-17-35-34.jpg"],
-    "szkolenie_przeciwpożarowe": ["PHOTO-2026-03-03-17-39-06.jpg", "PHOTO-2026-03-03-17-39-50.jpg", "PHOTO-2026-03-03-17-42-58.jpg"],
-    "zabezpieczenie_tras_kablowych": ["PHOTO-2026-03-03-17-29-15.jpg", "PHOTO-2026-03-03-17-32-13.jpg", "PHOTO-2026-03-03-17-33-13.jpg", "img1.jpeg"]
-};
 
-async function loadProjectGalleries() {
-    console.log('[GALLERY] Starting to load all project galleries...');
-    const projects = document.querySelectorAll('.portfolio-project');
-    console.log(`[GALLERY] Found ${projects.length} portfolio projects in DOM`);
-    
-    for (const project of projects) {
-        const projectName = project.getAttribute('data-project');
-        const gallery = project.querySelector('.portfolio-gallery');
-        
-        if (!projectName || !gallery) {
-            console.warn(`[GALLERY] Skipping - projectName: ${projectName}, gallery: ${!!gallery}`);
-            continue;
-        }
-        
-        console.log(`[GALLERY] Processing: ${projectName}`);
-        const images = await loadProjectImages(projectName);
-        console.log(`[GALLERY] Adding ${images.length} images to gallery for ${projectName}`);
-        
-        // Dodaj zdjęcia do galerii
-        images.forEach((imagePath, idx) => {
-            const img = document.createElement('img');
-            img.src = imagePath;
-            img.alt = `${projectName} - Zdjęcie ${idx + 1}`;
-            gallery.appendChild(img);
-            console.log(`[GALLERY] Image ${idx + 1} added: ${imagePath}`);
-        });
-    }
-    
-    console.log('[GALLERY] All galleries loaded!');
-}
-
-/**
- * Wczytuje zdjęcia z katalogu projektu
- * Korzysta z mapy projektów do znalezienia odpowiednich plików
- */
 async function loadProjectImages(projectName) {
     const images = [];
     const basePath = `projekty/${projectName}`;
     
     console.log(`[LOAD] Project: ${projectName}`);
     
-    // Użyj mapy projektów lub spróbuj domyślnej konwencji
-    const imageFiles = projectImagesMap[projectName] || tryDefaultNamingConventions(projectName);
+    // Zawsze używaj domyślnej konwencji (image_1.jpg, image_2.jpg, itd.)
+    const imageFiles = tryDefaultNamingConventions(projectName);
     
     console.log(`[LOAD] Trying ${imageFiles.length} file(s)`);
     
