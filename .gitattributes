@@ -1,0 +1,10 @@
+# GitHub Pages image optimization
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+
+# Large files - use Git LFS if needed (uncomment if using LFS)
+# *.jpg filter=lfs diff=lfs merge=lfs -text
+# *.jpeg filter=lfs diff=lfs merge=lfs -text
+# *.png filter=lfs diff=lfs merge=lfs -text
