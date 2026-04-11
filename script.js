@@ -488,19 +488,23 @@ async function loadProjectsManifest() {
         console.warn('[MANIFEST] Using fallback projects list');
         allProjects = [
             'budowa_stropu_przeciwpożarowego',
+            'dostawa_montaż_serwis samoczynnych_urządzeń_gaśniczych',
+            'montaż_AED',
             'montaz_klap_przeciwpożarowych',
             'montaz_oznakowania',
             'montaż_systemu_detekcji_gazu',
             'obsługa_dużych_inwestycji',
+            'przegląd_hydrantu',
             'serwis_systemu_gaszenia_gazem',
             'serwis_systemu_oddymiania',
-            'sprzedaż_defibrylatorów',
-            'zabezpieczenie_tras_kablowych',
-            'montaż_AED',
             'sprzedaż_AED',
-            'sprzedaż_sprzętu',
+            'sprzedaż_defibrylatorów',
             'sprzedaż_i_serwis_sprzętu_ppoż',
-            'szkolenie_przeciwpożarowe'
+            'sprzedaż_sprzętu',
+            'szkolenie_przeciwpożarowe',
+            'zabezpieczenie_tras_kablowych',
+            'zabudowa_przeciwpożarowa_głównego_zasilania_obiektu',
+            'zabudowa_przeciwpożarowa_w_ścianie_odporności_ogniowej'
         ];
         return allProjects;
     }
