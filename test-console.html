@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Console Test</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #0f0; }
+        #log { white-space: pre-wrap; max-height: 600px; overflow-y: auto; border: 1px solid #0f0; padding: 10px; }
+        button { padding: 10px; margin: 10px 0; background: #dc2626; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Gallery Debug Test</h1>
+    <button onclick="testFetch()">Test Fetch Image Paths</button>
+    <button onclick="clearLog()">Clear Log</button>
+    <div id="log"></div>
+    
+    <script>
+        const logEl = document.getElementById('log');
+        
+        // Override console.log to show in page
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog(...args);
+            logEl.textContent += args.join(' ') + '\n';
+            logEl.scrollTop = logEl.scrollHeight;
+        };
+        
+        const projectImagesMap = {
+            'montaz_klap_przeciwpożarowych': ['montaz_klap.jpeg'],
+            'serwis_systemu_gaszenia_gazem': ['serwis_systemu_gaszenia_gazem.jpeg'],
+            'obsługa_dużych_inwestycji': ['obsluga_duzych_inwestycji.jpeg'],
+            'montaz_oznakowania': ['montaz_oznakowania.jpeg', 'motaz_oznakowania.jpeg'],
+            'zabezpieczenie_tras_kablowych': ['img1.jpeg']
+        };
+        
+        async function testFetch() {
+            console.log('=== TESTING IMAGE PATHS ===');
+            for (const [project, files] of Object.entries(projectImagesMap)) {
+                console.log(`\nProject: ${project}`);
+                for (const file of files) {
+                    const path = `projekty/${project}/${file}`;
+                    try {
+                        const response = await fetch(path);
+                        console.log(`  ${file}: ${response.ok ? '✓ OK' : '✗ FAIL (status: ' + response.status + ')'}`);
+                    } catch(e) {
+                        console.log(`  ${file}: ✗ ERROR - ${e.message}`);
+                    }
+                }
+            }
+        }
+        
+        function clearLog() {
+            logEl.textContent = '';
+        }
+    </script>
+</body>
+</html>

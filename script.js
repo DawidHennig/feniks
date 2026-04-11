@@ -450,5 +450,366 @@ function initServiceModal() {
 
 initServiceModal();
 
+// ===== PORTFOLIO GALLERY =====
+/**
+ * Obsługuje wyświetlanie galerii projektów
+ * Dynamicznie wczytuje zdjęcia z katalogów projektów
+ */
+
+/**
+ * Lista wszystkich projektów - ładowana z projects-manifest.json
+ */
+let allProjects = [];
+
+/**
+ * Ładuje listę projektów z projects-manifest.json
+ */
+async function loadProjectsManifest() {
+    try {
+        const response = await fetch('projects-manifest.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        allProjects = data.projects || [];
+        console.log('[MANIFEST] Loaded projects:', allProjects);
+        return allProjects;
+    } catch (error) {
+        console.error('[MANIFEST] Error loading projects manifest:', error);
+        allProjects = [];
+        return allProjects;
+    }
+}
+
+/**
+ * Zwraca URL placeholdera SVG
+ */
+function getPlaceholderImage(projectName) {
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23333' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='%23999'%3EBrak zdjęć%3C/text%3E%3C/svg%3E`;
+}
+
+/**
+ * Formatuje nazwę projektu na czytelną etykietę
+ * montaz_klap_przeciwpożarowych -> Montaż Klap Przeciwpożarowych
+ */
+function formatProjectName(projectName) {
+    return projectName
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
+/**
+ * Generuje karty portfolio z listy projektów
+ */
+function generatePortfolioCards() {
+    console.log('[PORTFOLIO] generatePortfolioCards called');
+    
+    const portfolioGrid = document.getElementById('portfolioGrid');
+    console.log('[PORTFOLIO] portfolioGrid:', portfolioGrid ? 'found' : 'NOT FOUND');
+    
+    if (!portfolioGrid) {
+        console.error('[PORTFOLIO] portfolioGrid not found!');
+        return;
+    }
+    
+    console.log(`[PORTFOLIO] Generating ${allProjects.length} project cards...`);
+    
+    for (const projectName of allProjects) {
+        const projectTitle = formatProjectName(projectName);
+        
+        const projectCard = document.createElement('div');
+        projectCard.className = 'portfolio-project';
+        projectCard.setAttribute('data-project', projectName);
+        projectCard.innerHTML = `
+            <div class="portfolio-image-container">
+                <img src="${getPlaceholderImage(projectName)}" alt="${projectTitle}" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3>${projectTitle}</h3>
+                    <p>Kliknij aby zobaczyć realizacje</p>
+                </div>
+            </div>
+            <div class="portfolio-content">
+                <h3>${projectTitle}</h3>
+            </div>
+            <div class="portfolio-gallery" style="display: none;">
+            </div>
+        `;
+        
+        portfolioGrid.appendChild(projectCard);
+        console.log(`[PORTFOLIO] Created card: ${projectName}`);
+        
+        // Załaduj obrazy dla tej karty w tle
+        loadProjectImages(projectName).then(images => {
+            console.log(`[PORTFOLIO] Loaded ${images.length} images for ${projectName}`);
+            
+            // Jeśli są obrazy, zmień preview
+            if (images.length > 0) {
+                const imgElement = projectCard.querySelector('.portfolio-image');
+                imgElement.src = images[0];
+            }
+            
+            // Dodaj wszystkie obrazy do galerii
+            const gallery = projectCard.querySelector('.portfolio-gallery');
+            images.forEach((imagePath, idx) => {
+                const img = document.createElement('img');
+                img.src = imagePath;
+                img.alt = `${projectTitle} - Zdjęcie ${idx + 1}`;
+                gallery.appendChild(img);
+            });
+        }).catch(error => {
+            console.error(`[PORTFOLIO] Error loading images for ${projectName}:`, error);
+        });
+    }
+    
+    console.log('[PORTFOLIO] All portfolio cards generated!');
+}
+
+/**
+ * Mapa projektów do nazw plików zdjęć
+ * Umożliwia elastyczną obsługę różnych konwencji nazewnictwa
+ */
+const projectImagesMap = {
+    'montaz_klap_przeciwpożarowych': ['montaz_klap.jpeg'],
+    'serwis_systemu_gaszenia_gazem': ['serwis_systemu_gaszenia_gazem.jpeg'],
+    'obsługa_dużych_inwestycji': ['obsluga_duzych_inwestycji.jpeg'],
+    'montaz_oznakowania': ['montaz_oznakowania.jpeg', 'motaz_oznakowania.jpeg'],
+    'zabezpieczenie_tras_kablowych': ['img1.jpeg'],
+    'budowa_stropu_przeciwpożarowego': [],
+    'montaż_systemu_detekcji_gazu': [],
+    'serwis_systemu_oddymiania': [],
+    'sprzedaż_defibrylatorów': []
+};
+
+async function loadProjectGalleries() {
+    console.log('[GALLERY] Starting to load all project galleries...');
+    const projects = document.querySelectorAll('.portfolio-project');
+    console.log(`[GALLERY] Found ${projects.length} portfolio projects in DOM`);
+    
+    for (const project of projects) {
+        const projectName = project.getAttribute('data-project');
+        const gallery = project.querySelector('.portfolio-gallery');
+        
+        if (!projectName || !gallery) {
+            console.warn(`[GALLERY] Skipping - projectName: ${projectName}, gallery: ${!!gallery}`);
+            continue;
+        }
+        
+        console.log(`[GALLERY] Processing: ${projectName}`);
+        const images = await loadProjectImages(projectName);
+        console.log(`[GALLERY] Adding ${images.length} images to gallery for ${projectName}`);
+        
+        // Dodaj zdjęcia do galerii
+        images.forEach((imagePath, idx) => {
+            const img = document.createElement('img');
+            img.src = imagePath;
+            img.alt = `${projectName} - Zdjęcie ${idx + 1}`;
+            gallery.appendChild(img);
+            console.log(`[GALLERY] Image ${idx + 1} added: ${imagePath}`);
+        });
+    }
+    
+    console.log('[GALLERY] All galleries loaded!');
+}
+
+/**
+ * Wczytuje zdjęcia z katalogu projektu
+ * Korzysta z mapy projektów do znalezienia odpowiednich plików
+ */
+async function loadProjectImages(projectName) {
+    const images = [];
+    const basePath = `projekty/${projectName}`;
+    
+    console.log(`[LOAD] Project: ${projectName}`);
+    
+    // Użyj mapy projektów lub spróbuj domyślnej konwencji
+    const imageFiles = projectImagesMap[projectName] || tryDefaultNamingConventions(projectName);
+    
+    console.log(`[LOAD] Trying ${imageFiles.length} file(s)`);
+    
+    // Sprawdź czy każdy plik istnieje i dodaj do listy
+    for (const fileName of imageFiles) {
+        const imagePath = `${basePath}/${fileName}`;
+        const exists = await checkImageExists(imagePath);
+        if (exists) {
+            console.log(`[LOAD] ✓ Added to gallery: ${imagePath}`);
+            images.push(imagePath);
+        }
+    }
+    
+    console.log(`[LOAD] Total images found: ${images.length}`);
+    return images;
+}
+
+/**
+ * Próbuje domyślne konwencje nazewnictwa jeśli projekt nie jest w mapie
+ */
+function tryDefaultNamingConventions(projectName) {
+    const images = [];
+    const fileName = projectName.split('/').pop();
+    
+    // Próba 1: nazwa_projektu.jpeg
+    images.push(`${fileName}.jpeg`);
+    
+    // Próba 2: nazwa_projektu_2.jpeg, nazwa_projektu_3.jpeg, itd.
+    for (let i = 2; i <= 20; i++) {
+        images.push(`${fileName}_${i}.jpeg`);
+    }
+    
+    // Próba 3: img1.jpeg, img2.jpeg, itd.
+    for (let i = 1; i <= 20; i++) {
+        images.push(`img${i}.jpeg`);
+    }
+    
+    return images;
+}
+
+/**
+ * Sprawdza czy zdjęcie istnieje - zamiast fetch, spróbuj załadować image tag
+ */
+function checkImageExists(imagePath) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+            console.log(`    [CHECK] ${imagePath}: ✓ (loaded successfully)`);
+            resolve(true);
+        };
+        img.onerror = () => {
+            console.log(`    [CHECK] ${imagePath}: ✗ (failed to load)`);
+            resolve(false);
+        };
+        img.src = imagePath;
+    });
+}
+
+function initPortfolioGallery() {
+    const projects = document.querySelectorAll('.portfolio-project');
+    console.log(`[CLICK] Setting up click handlers for ${projects.length} projects`);
+    
+    projects.forEach((project, idx) => {
+        project.addEventListener('click', function(e) {
+            console.log(`[CLICK] Portfolio card ${idx} clicked!`);
+            e.stopPropagation();
+            
+            const gallery = this.querySelector('.portfolio-gallery');
+            const images = gallery ? gallery.querySelectorAll('img') : [];
+            const title = this.querySelector('.portfolio-overlay h3').textContent;
+            
+            console.log(`[CLICK] Gallery element found: ${!!gallery}`);
+            console.log(`[CLICK] Images in gallery: ${images.length}`);
+            console.log(`[CLICK] Title: ${title}`);
+            
+            if (images.length === 0) {
+                console.error('[CLICK] ERROR: No images found in gallery!');
+                console.error('[CLICK] Gallery HTML:', gallery ? gallery.innerHTML : 'NO GALLERY');
+                return;
+            }
+            
+            // Zbierz wszystkie obrazy z galerii
+            const imageSources = Array.from(images).map(img => img.src);
+            console.log(`[CLICK] Image sources:`, imageSources);
+            
+            // Stwórz modal dla galerii
+            const galleryModal = document.createElement('div');
+            galleryModal.className = 'gallery-modal';
+            galleryModal.innerHTML = `
+                <div class="gallery-modal-content">
+                    <button class="gallery-close-btn">&times;</button>
+                    <div class="gallery-container">
+                        <div class="gallery-main">
+                            <img src="${imageSources[0]}" alt="${title}" class="gallery-main-image">
+                        </div>
+                        <div class="gallery-title">
+                            <h2>${title}</h2>
+                        </div>
+                        ${imageSources.length > 1 ? `
+                            <div class="gallery-thumbnails">
+                                ${imageSources.map((imgSrc, idx) => `
+                                    <img src="${imgSrc}" alt="Zdjęcie ${idx + 1}" class="gallery-thumb" data-index="${idx}">
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(galleryModal);
+            document.body.style.overflow = 'hidden';
+            console.log('[CLICK] Modal created and added to DOM');
+            
+            // Obsługa zmiany zdjęcia po kliknięciu na miniaturę
+            const thumbnails = galleryModal.querySelectorAll('.gallery-thumb');
+            const mainImage = galleryModal.querySelector('.gallery-main-image');
+            
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const index = thumb.dataset.index;
+                    mainImage.src = imageSources[index];
+                    
+                    // Usuń active z poprzedniej miniatury
+                    galleryModal.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                });
+            });
+            
+            // Ustaw pierwszą miniaturę jako aktywną
+            if (thumbnails.length > 0) {
+                thumbnails[0].classList.add('active');
+            }
+            
+            // Zamknij modal
+            const closeBtn = galleryModal.querySelector('.gallery-close-btn');
+            closeBtn.addEventListener('click', () => {
+                galleryModal.remove();
+                document.body.style.overflow = 'auto';
+                console.log('[CLICK] Modal closed via close button');
+            });
+            
+            galleryModal.addEventListener('click', (e) => {
+                if (e.target === galleryModal) {
+                    galleryModal.remove();
+                    document.body.style.overflow = 'auto';
+                    console.log('[CLICK] Modal closed via background click');
+                }
+            });
+            
+            // Zamknij na ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && galleryModal.parentElement) {
+                    galleryModal.remove();
+                    document.body.style.overflow = 'auto';
+                    console.log('[CLICK] Modal closed via ESC key');
+                }
+            });
+        });
+    });
+}
+
+// ===== INIT PORTFOLIO =====
+// Ładuj manifest i inicjalizuj portfolio
+async function initPortfolio() {
+    console.log('[INIT] Starting portfolio initialization...');
+    
+    // Ładuj manifest projeków
+    await loadProjectsManifest();
+    console.log('[INIT] Manifest loaded!');
+    
+    // Generuj karty portfolio
+    generatePortfolioCards();
+    console.log('[INIT] Portfolio cards generated!');
+    
+    // Po wygenerowaniu kart ustaw click handler
+    initPortfolioGallery();
+    console.log('[INIT] Click handlers attached!');
+}
+
+// Inicjalizuj portfolio gdy strona się załaduje
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolio);
+} else {
+    initPortfolio();
+}
+
 // ===== INIT & LOG =====
 console.log('FENIKS - Strona załadowana pomyślnie! 🚀');

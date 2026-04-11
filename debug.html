@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #0f0; }
+        pre { background: #222; padding: 10px; border: 1px solid #0f0; }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Debug</h1>
+    <div id="portfolioGrid"></div>
+    
+    <pre id="log"></pre>
+    
+    <script>
+        const log = (msg) => {
+            const logEl = document.getElementById('log');
+            logEl.textContent += msg + '\n';
+            console.log(msg);
+        };
+        
+        log('✓ Script started');
+        log(`✓ portfolioGrid exists: ${!!document.getElementById('portfolioGrid')}`);
+        
+        // Test manifest loading
+        fetch('projects-manifest.json')
+            .then(r => r.json())
+            .then(data => {
+                log(`✓ Manifest loaded: ${data.projects.length} projects`);
+                data.projects.forEach(p => log(`  - ${p}`));
+            })
+            .catch(e => log(`✗ Manifest error: ${e.message}`));
+    </script>
+</body>
+</html>

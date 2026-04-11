@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gallery Test</title>
+</head>
+<body>
+    <div class="portfolio-project" data-project="montaz_klap_przeciwpożarowych">
+        <div class="portfolio-gallery"></div>
+    </div>
+    
+    <script>
+        // Test projectImagesMap
+        const projectImagesMap = {
+            'montaz_klap_przeciwpożarowych': ['montaz_klap.jpeg'],
+            'serwis_systemu_gaszenia_gazem': ['serwis_systemu_gaszenia_gazem.jpeg'],
+            'obsługa_dużych_inwestycji': ['obsluga_duzych_inwestycji.jpeg'],
+            'montaz_oznakowania': ['montaz_oznakowania.jpeg', 'motaz_oznakowania.jpeg'],
+            'zabezpieczenie_tras_kablowych': ['img1.jpeg']
+        };
+        
+        async function checkImageExists(imagePath) {
+            try {
+                const response = await fetch(imagePath, { method: 'HEAD' });
+                console.log(`Checking ${imagePath}: ${response.ok ? 'OK' : 'FAIL'}`);
+                return response.ok;
+            } catch (e) {
+                console.log(`Checking ${imagePath}: ERROR - ${e.message}`);
+                return false;
+            }
+        }
+        
+        async function test() {
+            console.log('Testing image paths...');
+            
+            const paths = [
+                'projekty/montaz_klap_przeciwpożarowych/montaz_klap.jpeg',
+                'projekty/serwis_systemu_gaszenia_gazem/serwis_systemu_gaszenia_gazem.jpeg',
+                'projekty/obsługa_dużych_inwestycji/obsluga_duzych_inwestycji.jpeg',
+                'projekty/montaz_oznakowania/montaz_oznakowania.jpeg',
+                'projekty/zabezpieczenie_tras_kablowych/img1.jpeg'
+            ];
+            
+            for (const path of paths) {
+                await checkImageExists(path);
+            }
+        }
+        
+        test();
+    </script>
+</body>
+</html>
