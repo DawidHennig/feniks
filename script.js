@@ -466,17 +466,42 @@ let allProjects = [];
  */
 async function loadProjectsManifest() {
     try {
+        console.log('[MANIFEST] Fetching projects-manifest.json...');
         const response = await fetch('projects-manifest.json');
+        console.log('[MANIFEST] Fetch response status:', response.status);
+        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log('[MANIFEST] Raw data:', data);
+        
         allProjects = data.projects || [];
         console.log('[MANIFEST] Loaded projects:', allProjects);
+        console.log('[MANIFEST] Total projects loaded:', allProjects.length);
         return allProjects;
     } catch (error) {
         console.error('[MANIFEST] Error loading projects manifest:', error);
-        allProjects = [];
+        console.error('[MANIFEST] Error details:', error.message);
+        
+        // Fallback - jeśli manifest się nie ładuje, użyj hardcoded listy
+        console.warn('[MANIFEST] Using fallback projects list');
+        allProjects = [
+            'budowa_stropu_przeciwpożarowego',
+            'montaz_klap_przeciwpożarowych',
+            'montaz_oznakowania',
+            'montaż_systemu_detekcji_gazu',
+            'obsługa_dużych_inwestycji',
+            'serwis_systemu_gaszenia_gazem',
+            'serwis_systemu_oddymiania',
+            'sprzedaż_defibrylatorów',
+            'zabezpieczenie_tras_kablowych',
+            'montaż_AED',
+            'sprzedaż_AED',
+            'sprzedaż_sprzętu',
+            'sprzedaż_i_serwis_sprzętu_ppoż',
+            'szkolenie_przeciwpożarowe'
+        ];
         return allProjects;
     }
 }
