@@ -595,15 +595,20 @@ function generatePortfolioCards() {
  * Umożliwia elastyczną obsługę różnych konwencji nazewnictwa
  */
 const projectImagesMap = {
-    'montaz_klap_przeciwpożarowych': ['montaz_klap.jpeg'],
-    'serwis_systemu_gaszenia_gazem': ['serwis_systemu_gaszenia_gazem.jpeg'],
-    'obsługa_dużych_inwestycji': ['obsluga_duzych_inwestycji.jpeg'],
-    'montaz_oznakowania': ['montaz_oznakowania.jpeg', 'motaz_oznakowania.jpeg'],
-    'zabezpieczenie_tras_kablowych': ['img1.jpeg'],
-    'budowa_stropu_przeciwpożarowego': [],
-    'montaż_systemu_detekcji_gazu': [],
-    'serwis_systemu_oddymiania': [],
-    'sprzedaż_defibrylatorów': []
+    "budowa_stropu_przeciwpożarowego": ["PHOTO-2026-03-03-17-25-58.jpg"],
+    "montaz_klap_przeciwpożarowych": ["montaz_klap.jpeg"],
+    "montaz_oznakowania": ["montaz_oznakowania.jpeg", "motaz_oznakowania.jpeg"],
+    "montaż_AED": ["PHOTO-2026-03-03-17-35-54.jpg"],
+    "montaż_systemu_detekcji_gazu": ["PHOTO-2026-03-03-17-22-01.jpg"],
+    "obsługa_dużych_inwestycji": ["obsluga_duzych_inwestycji.jpeg"],
+    "serwis_systemu_gaszenia_gazem": ["serwis_systemu_gaszenia_gazem.jpeg"],
+    "serwis_systemu_oddymiania": ["PHOTO-2026-03-03-17-23-33.jpg"],
+    "sprzedaż_AED": ["PHOTO-2026-03-03-17-36-38.jpg"],
+    "sprzedaż_i_serwis_sprzętu_ppoż": ["PHOTO-2026-03-03-17-40-55.jpg"],
+    "sprzedaż_sprzętu": ["PHOTO-2026-03-03-17-40-27.jpg"],
+    "sprzedaż_defibrylatorów": ["PHOTO-2026-03-03-17-35-34.jpg"],
+    "szkolenie_przeciwpożarowe": ["PHOTO-2026-03-03-17-39-06.jpg", "PHOTO-2026-03-03-17-39-50.jpg", "PHOTO-2026-03-03-17-42-58.jpg"],
+    "zabezpieczenie_tras_kablowych": ["PHOTO-2026-03-03-17-29-15.jpg", "PHOTO-2026-03-03-17-32-13.jpg", "PHOTO-2026-03-03-17-33-13.jpg", "img1.jpeg"]
 };
 
 async function loadProjectGalleries() {
@@ -673,17 +678,26 @@ function tryDefaultNamingConventions(projectName) {
     const images = [];
     const fileName = projectName.split('/').pop();
     
-    // Próba 1: nazwa_projektu.jpeg
-    images.push(`${fileName}.jpeg`);
+    // Spróbuj obu rozszerzeń: .jpeg i .jpg
+    const extensions = ['jpeg', 'jpg'];
     
-    // Próba 2: nazwa_projektu_2.jpeg, nazwa_projektu_3.jpeg, itd.
-    for (let i = 2; i <= 20; i++) {
-        images.push(`${fileName}_${i}.jpeg`);
+    // Próba 1: nazwa_projektu.jpeg / nazwa_projektu.jpg
+    for (const ext of extensions) {
+        images.push(`${fileName}.${ext}`);
     }
     
-    // Próba 3: img1.jpeg, img2.jpeg, itd.
+    // Próba 2: nazwa_projektu_2.jpeg/jpg, nazwa_projektu_3.jpeg/jpg, itd.
+    for (let i = 2; i <= 20; i++) {
+        for (const ext of extensions) {
+            images.push(`${fileName}_${i}.${ext}`);
+        }
+    }
+    
+    // Próba 3: img1.jpeg/jpg, img2.jpeg/jpg, itd.
     for (let i = 1; i <= 20; i++) {
-        images.push(`img${i}.jpeg`);
+        for (const ext of extensions) {
+            images.push(`img${i}.${ext}`);
+        }
     }
     
     return images;
