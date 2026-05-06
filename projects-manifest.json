@@ -1,22 +1,95 @@
 {
   "projects": [
-    "budowa_stropu_przeciwpozarowego",
-    "dostawa_montaz_serwis_samoczynnych_urzadzen_gasinczych",
-    "montaz_AED",
-    "montaz_klap_przeciwpozarowych",
-    "montaz_oznakowania",
-    "montaz_systemu_detekcji_gazu",
-    "obsluga_duzych_inwestycji",
-    "przeglad_hydrantu",
-    "serwis_systemu_gaszenia_gazem",
-    "serwis_systemu_oddymiania",
-    "sprzedaz_AED",
-    "sprzedaz_defibrylatrow",
-    "sprzedaz_i_serwis_sprzetu_ppoz",
-    "sprzedaz_sprzetu",
-    "szkolenie_przeciwpozarowe",
-    "zabezpieczenie_tras_kablowych",
-    "zabudowa_przeciwpozarowa_glownego_zasilania_obiektu",
-    "zabudowa_przeciwpozarowa_w_scianie_odpornosci_ogniowej"
+    {
+      "id": "budowa_stropu_przeciwpozarowego",
+      "images": ["projekty/budowa_stropu_przeciwpozarowego/image_1.jpg"]
+    },
+    {
+      "id": "dostawa_montaz_serwis_samoczynnych_urzadzen_gasinczych",
+      "images": ["projekty/dostawa_montaz_serwis_samoczynnych_urzadzen_gasinczych/image_1.jpg"]
+    },
+    {
+      "id": "montaz_AED",
+      "images": ["projekty/montaz_AED/image_1.jpg"]
+    },
+    {
+      "id": "montaz_klap_przeciwpozarowych",
+      "images": ["projekty/montaz_klap_przeciwpozarowych/image_1.jpeg"]
+    },
+    {
+      "id": "montaz_oznakowania",
+      "images": [
+        "projekty/montaz_oznakowania/image_1.jpeg",
+        "projekty/montaz_oznakowania/image_2.jpeg",
+        "projekty/montaz_oznakowania/image_3.jpg",
+        "projekty/montaz_oznakowania/image_4.jpg"
+      ]
+    },
+    {
+      "id": "montaz_systemu_detekcji_gazu",
+      "images": ["projekty/montaz_systemu_detekcji_gazu/image_1.jpg"]
+    },
+    {
+      "id": "obsluga_duzych_inwestycji",
+      "images": ["projekty/obsluga_duzych_inwestycji/image_1.jpeg"]
+    },
+    {
+      "id": "przeglad_hydrantu",
+      "images": ["projekty/przeglad_hydrantu/image_1.jpg"]
+    },
+    {
+      "id": "serwis_systemu_gaszenia_gazem",
+      "images": ["projekty/serwis_systemu_gaszenia_gazem/image_1.jpeg"]
+    },
+    {
+      "id": "serwis_systemu_oddymiania",
+      "images": [
+        "projekty/serwis_systemu_oddymiania/image_1.jpg",
+        "projekty/serwis_systemu_oddymiania/image_2.jpg",
+        "projekty/serwis_systemu_oddymiania/image_3.jpg",
+        "projekty/serwis_systemu_oddymiania/image_4.jpg"
+      ]
+    },
+    {
+      "id": "sprzedaz_AED",
+      "images": ["projekty/sprzedaz_AED/image_1.jpg"]
+    },
+    {
+      "id": "sprzedaz_defibrylatrow",
+      "images": ["projekty/sprzedaz_defibrylatrow/image_1.jpg"]
+    },
+    {
+      "id": "sprzedaz_i_serwis_sprzetu_ppoz",
+      "images": ["projekty/sprzedaz_i_serwis_sprzetu_ppoz/image_1.jpg"]
+    },
+    {
+      "id": "sprzedaz_sprzetu",
+      "images": ["projekty/sprzedaz_sprzetu/image_1.jpg"]
+    },
+    {
+      "id": "szkolenie_przeciwpozarowe",
+      "images": [
+        "projekty/szkolenie_przeciwpozarowe/image_1.jpg",
+        "projekty/szkolenie_przeciwpozarowe/image_2.jpg",
+        "projekty/szkolenie_przeciwpozarowe/image_3.jpg"
+      ]
+    },
+    {
+      "id": "zabezpieczenie_tras_kablowych",
+      "images": [
+        "projekty/zabezpieczenie_tras_kablowych/image_1.jpeg",
+        "projekty/zabezpieczenie_tras_kablowych/image_2.jpg",
+        "projekty/zabezpieczenie_tras_kablowych/image_3.jpg",
+        "projekty/zabezpieczenie_tras_kablowych/image_4.jpg"
+      ]
+    },
+    {
+      "id": "zabudowa_przeciwpozarowa_glownego_zasilania_obiektu",
+      "images": ["projekty/zabudowa_przeciwpozarowa_glownego_zasilania_obiektu/image_1.jpg"]
+    },
+    {
+      "id": "zabudowa_przeciwpozarowa_w_scianie_odpornosci_ogniowej",
+      "images": ["projekty/zabudowa_przeciwpozarowa_w_scianie_odpornosci_ogniowej/image_1.jpg"]
+    }
   ]
 }

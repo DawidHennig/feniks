@@ -483,30 +483,7 @@ async function loadProjectsManifest() {
     } catch (error) {
         console.error('[MANIFEST] Error loading projects manifest:', error);
         console.error('[MANIFEST] Error details:', error.message);
-        
-        // Fallback - jeśli manifest się nie ładuje, użyj hardcoded listy
-        console.warn('[MANIFEST] Using fallback projects list');
-        allProjects = [
-            'budowa_stropu_przeciwpozarowego',
-            'dostawa_montaz_serwis_samoczynnych_urzadzen_gasinczych',
-            'montaz_AED',
-            'montaz_klap_przeciwpozarowych',
-            'montaz_oznakowania',
-            'montaz_systemu_detekcji_gazu',
-            'obsluga_duzych_inwestycji',
-            'przeglad_hydrantu',
-            'serwis_systemu_gaszenia_gazem',
-            'serwis_systemu_oddymiania',
-            'sprzedaz_AED',
-            'sprzedaz_defibrylatrow',
-            'sprzedaz_i_serwis_sprzetu_ppoz',
-            'sprzedaz_sprzetu',
-            'szkolenie_przeciwpozarowe',
-            'zabezpieczenie_tras_kablowych',
-            'zabudowa_przeciwpozarowa_glownego_zasilania_obiektu',
-            'zabudowa_przeciwpozarowa_w_scianie_odpornosci_ogniowej'
-        ];
-        return allProjects;
+        return [];
     }
 }
 
@@ -533,6 +510,7 @@ function formatProjectName(projectName) {
  */
 function generatePortfolioCards() {
     console.log('[PORTFOLIO] generatePortfolioCards called');
+    console.log('[PORTFOLIO] allProjects:', allProjects);
     
     const portfolioGrid = document.getElementById('portfolioGrid');
     console.log('[PORTFOLIO] portfolioGrid:', portfolioGrid ? 'found' : 'NOT FOUND');
@@ -544,15 +522,21 @@ function generatePortfolioCards() {
     
     console.log(`[PORTFOLIO] Generating ${allProjects.length} project cards...`);
     
-    for (const projectName of allProjects) {
-        const projectTitle = formatProjectName(projectName);
+    for (const project of allProjects) {
+        console.log('[PORTFOLIO] Processing project:', project);
+        const projectId = project.id;
+        const projectImages = project.images || [];
+        const projectTitle = formatProjectName(projectId);
+        const previewImage = projectImages.length > 0 ? projectImages[0] : getPlaceholderImage(projectId);
+        
+        console.log(`[PORTFOLIO] projectId: ${projectId}, images: ${projectImages.length}, preview: ${previewImage}`);
         
         const projectCard = document.createElement('div');
         projectCard.className = 'portfolio-project';
-        projectCard.setAttribute('data-project', projectName);
+        projectCard.setAttribute('data-project', projectId);
         projectCard.innerHTML = `
             <div class="portfolio-image-container">
-                <img src="${getPlaceholderImage(projectName)}" alt="${projectTitle}" class="portfolio-image">
+                <img src="${previewImage}" alt="${projectTitle}" class="portfolio-image">
                 <div class="portfolio-overlay">
                     <h3>${projectTitle}</h3>
                     <p>Kliknij aby zobaczyć realizacje</p>
@@ -566,28 +550,16 @@ function generatePortfolioCards() {
         `;
         
         portfolioGrid.appendChild(projectCard);
-        console.log(`[PORTFOLIO] Created card: ${projectName}`);
+        console.log(`[PORTFOLIO] Created card: ${projectId}`);
         
-        // Załaduj obrazy dla tej karty w tle
-        loadProjectImages(projectName).then(images => {
-            console.log(`[PORTFOLIO] Loaded ${images.length} images for ${projectName}`);
-            
-            // Jeśli są obrazy, zmień preview
-            if (images.length > 0) {
-                const imgElement = projectCard.querySelector('.portfolio-image');
-                imgElement.src = images[0];
-            }
-            
-            // Dodaj wszystkie obrazy do galerii
-            const gallery = projectCard.querySelector('.portfolio-gallery');
-            images.forEach((imagePath, idx) => {
-                const img = document.createElement('img');
-                img.src = imagePath;
-                img.alt = `${projectTitle} - Zdjęcie ${idx + 1}`;
-                gallery.appendChild(img);
-            });
-        }).catch(error => {
-            console.error(`[PORTFOLIO] Error loading images for ${projectName}:`, error);
+        // Dodaj wszystkie obrazy do galerii
+        const gallery = projectCard.querySelector('.portfolio-gallery');
+        projectImages.forEach((imagePath, idx) => {
+            const img = document.createElement('img');
+            img.src = imagePath;
+            img.alt = `${projectTitle} - Zdjęcie ${idx + 1}`;
+            gallery.appendChild(img);
+            console.log(`[PORTFOLIO] Added image: ${imagePath}`);
         });
     }
     
@@ -598,75 +570,6 @@ function generatePortfolioCards() {
  * Mapa projektów do nazw plików zdjęć
  * Umożliwia elastyczną obsługę różnych konwencji nazewnictwa
  */
-
-async function loadProjectImages(projectName) {
-    const images = [];
-    const basePath = `projekty/${projectName}`;
-    
-    console.log(`[LOAD] Project: ${projectName}`);
-    
-    // Zawsze używaj domyślnej konwencji (image_1.jpg, image_2.jpg, itd.)
-    const imageFiles = tryDefaultNamingConventions(projectName);
-    
-    console.log(`[LOAD] Trying ${imageFiles.length} file(s)`);
-    
-    // Sprawdź czy każdy plik istnieje i dodaj do listy
-    for (const fileName of imageFiles) {
-        const imagePath = `${basePath}/${fileName}`;
-        const exists = await checkImageExists(imagePath);
-        if (exists) {
-            console.log(`[LOAD] ✓ Added to gallery: ${imagePath}`);
-            images.push(imagePath);
-        }
-    }
-    
-    console.log(`[LOAD] Total images found: ${images.length}`);
-    return images;
-}
-
-/**
- * Próbuje domyślne konwencje nazewnictwa jeśli projekt nie jest w mapie
- */
-function tryDefaultNamingConventions(projectName) {
-    const images = [];
-    
-    // Spróbuj obu rozszerzeń: .jpeg i .jpg
-    const extensions = ['jpg', 'jpeg', 'png'];
-    
-    // Próba 1: image_1.jpg, image_2.jpg, itd (główny format)
-    for (let i = 1; i <= 20; i++) {
-        for (const ext of extensions) {
-            images.push(`image_${i}.${ext}`);
-        }
-    }
-    
-    // Próba 2: img1.jpg, img2.jpg, itd (fallback)
-    for (let i = 1; i <= 20; i++) {
-        for (const ext of extensions) {
-            images.push(`img${i}.${ext}`);
-        }
-    }
-    
-    return images;
-}
-
-/**
- * Sprawdza czy zdjęcie istnieje - zamiast fetch, spróbuj załadować image tag
- */
-function checkImageExists(imagePath) {
-    return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => {
-            console.log(`    [CHECK] ${imagePath}: ✓ (loaded successfully)`);
-            resolve(true);
-        };
-        img.onerror = () => {
-            console.log(`    [CHECK] ${imagePath}: ✗ (failed to load)`);
-            resolve(false);
-        };
-        img.src = imagePath;
-    });
-}
 
 function initPortfolioGallery() {
     const projects = document.querySelectorAll('.portfolio-project');
