@@ -2,22 +2,27 @@
   "projects": [
     {
       "id": "budowa_stropu_przeciwpozarowego",
+      "title": "Budowa Stropu Przeciwpożarowego",
       "images": ["projekty/budowa_stropu_przeciwpozarowego/image_1.jpg"]
     },
     {
       "id": "dostawa_montaz_serwis_samoczynnych_urzadzen_gasinczych",
+      "title": "Dostawa Montaż Serwis Samoczynnych Urządzeń Gaśniczych",
       "images": ["projekty/dostawa_montaz_serwis_samoczynnych_urzadzen_gasinczych/image_1.jpg"]
     },
     {
       "id": "montaz_AED",
+      "title": "Montaż AED",
       "images": ["projekty/montaz_AED/image_1.jpg"]
     },
     {
       "id": "montaz_klap_przeciwpozarowych",
+      "title": "Montaż Klap Przeciwpożarowych",
       "images": ["projekty/montaz_klap_przeciwpozarowych/image_1.jpeg"]
     },
     {
       "id": "montaz_oznakowania",
+      "title": "Montaż Oznakowania",
       "images": [
         "projekty/montaz_oznakowania/image_1.jpeg",
         "projekty/montaz_oznakowania/image_2.jpeg",
@@ -27,22 +32,27 @@
     },
     {
       "id": "montaz_systemu_detekcji_gazu",
+      "title": "Montaż Systemu Detekcji Gazu",
       "images": ["projekty/montaz_systemu_detekcji_gazu/image_1.jpg"]
     },
     {
       "id": "obsluga_duzych_inwestycji",
+      "title": "Obsługa Dużych Inwestycji",
       "images": ["projekty/obsluga_duzych_inwestycji/image_1.jpeg"]
     },
     {
       "id": "przeglad_hydrantu",
+      "title": "Przegląd Hydrantu",
       "images": ["projekty/przeglad_hydrantu/image_1.jpg"]
     },
     {
       "id": "serwis_systemu_gaszenia_gazem",
+      "title": "Serwis Systemu Gaszenia Gazem",
       "images": ["projekty/serwis_systemu_gaszenia_gazem/image_1.jpeg"]
     },
     {
       "id": "serwis_systemu_oddymiania",
+      "title": "Serwis Systemu Oddymiania",
       "images": [
         "projekty/serwis_systemu_oddymiania/image_1.jpg",
         "projekty/serwis_systemu_oddymiania/image_2.jpg",
@@ -52,22 +62,27 @@
     },
     {
       "id": "sprzedaz_AED",
+      "title": "Sprzedaż AED",
       "images": ["projekty/sprzedaz_AED/image_1.jpg"]
     },
     {
       "id": "sprzedaz_defibrylatrow",
+      "title": "Sprzedaż Defibrylatorów",
       "images": ["projekty/sprzedaz_defibrylatrow/image_1.jpg"]
     },
     {
       "id": "sprzedaz_i_serwis_sprzetu_ppoz",
+      "title": "Sprzedaż i Serwis Sprzętu Ppoż",
       "images": ["projekty/sprzedaz_i_serwis_sprzetu_ppoz/image_1.jpg"]
     },
     {
       "id": "sprzedaz_sprzetu",
+      "title": "Sprzedaż Sprzętu",
       "images": ["projekty/sprzedaz_sprzetu/image_1.jpg"]
     },
     {
       "id": "szkolenie_przeciwpozarowe",
+      "title": "Szkolenie Przeciwpożarowe",
       "images": [
         "projekty/szkolenie_przeciwpozarowe/image_1.jpg",
         "projekty/szkolenie_przeciwpozarowe/image_2.jpg",
@@ -76,6 +91,7 @@
     },
     {
       "id": "zabezpieczenie_tras_kablowych",
+      "title": "Zabezpieczenie Tras Kablowych",
       "images": [
         "projekty/zabezpieczenie_tras_kablowych/image_1.jpeg",
         "projekty/zabezpieczenie_tras_kablowych/image_2.jpg",
@@ -85,10 +101,12 @@
     },
     {
       "id": "zabudowa_przeciwpozarowa_glownego_zasilania_obiektu",
+      "title": "Zabudowa Przeciwpożarowa Głównego Zasilania Obiektu",
       "images": ["projekty/zabudowa_przeciwpozarowa_glownego_zasilania_obiektu/image_1.jpg"]
     },
     {
       "id": "zabudowa_przeciwpozarowa_w_scianie_odpornosci_ogniowej",
+      "title": "Zabudowa Przeciwpożarowa w Ścianie Odporności Ogniowej",
       "images": ["projekty/zabudowa_przeciwpozarowa_w_scianie_odpornosci_ogniowej/image_1.jpg"]
     }
   ]

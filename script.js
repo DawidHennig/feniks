@@ -526,7 +526,7 @@ function generatePortfolioCards() {
         console.log('[PORTFOLIO] Processing project:', project);
         const projectId = project.id;
         const projectImages = project.images || [];
-        const projectTitle = formatProjectName(projectId);
+        const projectTitle = project.title || formatProjectName(projectId);
         const previewImage = projectImages.length > 0 ? projectImages[0] : getPlaceholderImage(projectId);
         
         console.log(`[PORTFOLIO] projectId: ${projectId}, images: ${projectImages.length}, preview: ${previewImage}`);
