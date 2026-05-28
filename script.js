@@ -496,12 +496,12 @@ function getPlaceholderImage(projectName) {
 
 /**
  * Formatuje nazwę projektu na czytelną etykietę
- * montaz_klap_przeciwpożarowych -> Montaż Klap Przeciwpożarowych
+ * montaz_klap_przeciwpozarowych -> Montaz klap przeciwpozarowych
  */
 function formatProjectName(projectName) {
-    return projectName
-        .split('_')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    const words = projectName.split('_');
+    return words
+        .map((word, index) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
         .join(' ');
 }
 
