@@ -1,5 +1,54 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <!-- Black background -->
   <rect width="192" height="192" fill="#0a0a0a" rx="40"/>
-  <rect width="192" height="192" fill="#dc2626" rx="40" opacity="0.9"/>
-  <text x="96" y="130" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="#ffffff" text-anchor="middle">F</text>
+  
+  <!-- Flames - bottom layer (orange/red gradient) -->
+  <defs>
+    <linearGradient id="flameGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#dc2626;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0.6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Left flame -->
+  <path d="M 40 140 Q 30 110 45 85 Q 50 95 55 110 Q 50 125 40 140 Z" fill="url(#flameGradient)" opacity="0.7"/>
+  
+  <!-- Center flame -->
+  <path d="M 96 160 Q 80 130 85 90 Q 96 110 105 90 Q 110 130 96 160 Z" fill="url(#flameGradient)" opacity="0.85"/>
+  
+  <!-- Right flame -->
+  <path d="M 152 140 Q 162 110 147 85 Q 142 95 137 110 Q 142 125 152 140 Z" fill="url(#flameGradient)" opacity="0.7"/>
+  
+  <!-- Phoenix body - geometric style -->
+  <!-- Main body (oval) -->
+  <ellipse cx="96" cy="95" rx="28" ry="35" fill="#dc2626"/>
+  
+  <!-- Phoenix head -->
+  <circle cx="96" cy="55" r="18" fill="#dc2626"/>
+  
+  <!-- Phoenix beak (triangle) -->
+  <path d="M 108 53 L 125 50 L 108 57 Z" fill="#dc2626"/>
+  
+  <!-- Eye -->
+  <circle cx="103" cy="52" r="3" fill="#fbbf24"/>
+  
+  <!-- Left wing (geometric) -->
+  <path d="M 70 85 Q 45 75 50 110 Q 60 100 70 95 Z" fill="#dc2626" opacity="0.9"/>
+  
+  <!-- Left wing feathers -->
+  <path d="M 52 85 L 48 92 M 55 88 L 50 96 M 58 90 L 52 99" stroke="#fbbf24" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Right wing (geometric) -->
+  <path d="M 122 85 Q 147 75 142 110 Q 132 100 122 95 Z" fill="#dc2626" opacity="0.9"/>
+  
+  <!-- Right wing feathers -->
+  <path d="M 140 85 L 144 92 M 137 88 L 142 96 M 134 90 L 140 99" stroke="#fbbf24" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Tail feathers (upward pointing, stylized) -->
+  <path d="M 96 128 L 85 145 M 96 128 L 96 150 M 96 128 L 107 145" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Fire aura around phoenix -->
+  <circle cx="96" cy="95" r="48" fill="none" stroke="#f97316" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="96" cy="95" r="52" fill="none" stroke="#fbbf24" stroke-width="0.8" opacity="0.2"/>
 </svg>
