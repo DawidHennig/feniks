@@ -2,53 +2,95 @@
   <!-- Black background -->
   <rect width="192" height="192" fill="#0a0a0a" rx="40"/>
   
-  <!-- Flames - bottom layer (orange/red gradient) -->
+  <!-- Gradient definitions -->
   <defs>
-    <linearGradient id="flameGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" style="stop-color:#f97316;stop-opacity:0.8" />
-      <stop offset="50%" style="stop-color:#dc2626;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0.6" />
+    <linearGradient id="flameGradient" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#dc2626;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0.7" />
     </linearGradient>
+    <radialGradient id="bodyGradient" cx="40%" cy="40%">
+      <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+    </radialGradient>
   </defs>
   
-  <!-- Left flame -->
-  <path d="M 40 140 Q 30 110 45 85 Q 50 95 55 110 Q 50 125 40 140 Z" fill="url(#flameGradient)" opacity="0.7"/>
+  <!-- Outer flame aura -->
+  <circle cx="96" cy="110" r="65" fill="none" stroke="#f97316" stroke-width="2" opacity="0.3"/>
   
-  <!-- Center flame -->
-  <path d="M 96 160 Q 80 130 85 90 Q 96 110 105 90 Q 110 130 96 160 Z" fill="url(#flameGradient)" opacity="0.85"/>
+  <!-- Flames - complex fire pattern -->
+  <!-- Left flame -->
+  <path d="M 30 140 Q 20 110 35 80 Q 40 100 50 120 Q 45 135 30 140 Z" fill="url(#flameGradient)"/>
+  <path d="M 35 135 Q 28 115 38 95 Q 42 110 48 125 Q 44 133 35 135 Z" fill="#fbbf24" opacity="0.6"/>
+  
+  <!-- Center left flame -->
+  <path d="M 65 155 Q 55 120 60 85 Q 70 105 78 130 Q 72 150 65 155 Z" fill="url(#flameGradient)"/>
+  <path d="M 68 150 Q 62 125 67 95 Q 75 115 82 140 Q 76 148 68 150 Z" fill="#fbbf24" opacity="0.5"/>
+  
+  <!-- Center flame (tallest) -->
+  <path d="M 96 170 Q 80 130 82 75 Q 96 105 110 75 Q 112 130 96 170 Z" fill="url(#flameGradient)"/>
+  <path d="M 96 165 Q 85 135 87 90 Q 96 115 105 90 Q 107 135 96 165 Z" fill="#fbbf24" opacity="0.6"/>
+  
+  <!-- Center right flame -->
+  <path d="M 127 155 Q 137 120 132 85 Q 122 105 114 130 Q 120 150 127 155 Z" fill="url(#flameGradient)"/>
+  <path d="M 124 150 Q 130 125 125 95 Q 117 115 110 140 Q 116 148 124 150 Z" fill="#fbbf24" opacity="0.5"/>
   
   <!-- Right flame -->
-  <path d="M 152 140 Q 162 110 147 85 Q 142 95 137 110 Q 142 125 152 140 Z" fill="url(#flameGradient)" opacity="0.7"/>
+  <path d="M 162 140 Q 172 110 157 80 Q 152 100 142 120 Q 147 135 162 140 Z" fill="url(#flameGradient)"/>
+  <path d="M 157 135 Q 164 115 154 95 Q 150 110 144 125 Q 148 133 157 135 Z" fill="#fbbf24" opacity="0.6"/>
   
-  <!-- Phoenix body - geometric style -->
-  <!-- Main body (oval) -->
-  <ellipse cx="96" cy="95" rx="28" ry="35" fill="#dc2626"/>
+  <!-- Phoenix body -->
+  <!-- Main body (larger, more dramatic) -->
+  <ellipse cx="96" cy="100" rx="32" ry="40" fill="url(#bodyGradient)"/>
+  
+  <!-- Phoenix chest (accent) -->
+  <ellipse cx="96" cy="95" rx="22" ry="28" fill="#fbbf24" opacity="0.3"/>
   
   <!-- Phoenix head -->
-  <circle cx="96" cy="55" r="18" fill="#dc2626"/>
+  <circle cx="96" cy="55" r="20" fill="url(#bodyGradient)"/>
   
-  <!-- Phoenix beak (triangle) -->
-  <path d="M 108 53 L 125 50 L 108 57 Z" fill="#dc2626"/>
+  <!-- Phoenix crest (crown-like feathers on head) -->
+  <path d="M 88 35 L 85 20 M 96 32 L 96 15 M 104 35 L 107 20" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Phoenix beak -->
+  <path d="M 110 55 L 135 50 L 112 60 Z" fill="#fbbf24"/>
   
   <!-- Eye -->
-  <circle cx="103" cy="52" r="3" fill="#fbbf24"/>
+  <circle cx="105" cy="52" r="3.5" fill="#fbbf24"/>
   
-  <!-- Left wing (geometric) -->
-  <path d="M 70 85 Q 45 75 50 110 Q 60 100 70 95 Z" fill="#dc2626" opacity="0.9"/>
+  <!-- Left wing (large, spread out) -->
+  <path d="M 65 85 Q 30 70 25 100 Q 35 90 55 95 Q 65 90 70 100 Z" fill="url(#bodyGradient)" opacity="0.9"/>
   
-  <!-- Left wing feathers -->
-  <path d="M 52 85 L 48 92 M 55 88 L 50 96 M 58 90 L 52 99" stroke="#fbbf24" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Left wing feather details -->
+  <g stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7">
+    <path d="M 45 80 L 35 85"/>
+    <path d="M 50 85 L 38 92"/>
+    <path d="M 55 90 L 42 98"/>
+    <path d="M 60 93 L 48 102"/>
+  </g>
   
-  <!-- Right wing (geometric) -->
-  <path d="M 122 85 Q 147 75 142 110 Q 132 100 122 95 Z" fill="#dc2626" opacity="0.9"/>
+  <!-- Right wing (large, spread out) -->
+  <path d="M 127 85 Q 162 70 167 100 Q 157 90 137 95 Q 127 90 122 100 Z" fill="url(#bodyGradient)" opacity="0.9"/>
   
-  <!-- Right wing feathers -->
-  <path d="M 140 85 L 144 92 M 137 88 L 142 96 M 134 90 L 140 99" stroke="#fbbf24" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Right wing feather details -->
+  <g stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7">
+    <path d="M 147 80 L 157 85"/>
+    <path d="M 142 85 L 154 92"/>
+    <path d="M 137 90 L 150 98"/>
+    <path d="M 132 93 L 144 102"/>
+  </g>
   
-  <!-- Tail feathers (upward pointing, stylized) -->
-  <path d="M 96 128 L 85 145 M 96 128 L 96 150 M 96 128 L 107 145" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Tail feathers (dramatic, fanned out upward) -->
+  <path d="M 85 135 L 75 160" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 96 138 L 96 165" stroke="#fbbf24" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 107 135 L 117 160" stroke="#fbbf24" stroke-width="2.5" fill="none" stroke-linecap="round"/>
   
-  <!-- Fire aura around phoenix -->
-  <circle cx="96" cy="95" r="48" fill="none" stroke="#f97316" stroke-width="1.5" opacity="0.4"/>
-  <circle cx="96" cy="95" r="52" fill="none" stroke="#fbbf24" stroke-width="0.8" opacity="0.2"/>
+  <!-- Additional tail feather (center, highlighted) -->
+  <path d="M 96 138 L 96 168" stroke="#f97316" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Fire particles around phoenix -->
+  <circle cx="75" cy="75" r="2" fill="#fbbf24" opacity="0.7"/>
+  <circle cx="120" cy="70" r="2" fill="#f97316" opacity="0.6"/>
+  <circle cx="65" cy="95" r="1.5" fill="#fbbf24" opacity="0.5"/>
+  <circle cx="130" cy="100" r="1.5" fill="#f97316" opacity="0.5"/>
 </svg>
