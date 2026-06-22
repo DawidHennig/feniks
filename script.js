@@ -245,11 +245,10 @@ function generatePortfolioCards() {
         const card = document.createElement('div');
         card.className = 'portfolio-project';
         card.setAttribute('data-project', p.id);
-        const img = p.images?.[0] || 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Crect fill=%27%23333%27 width=%27400%27 height=%27300%27/%3E%3C/svg%3E';
+        const img = p.images?.[0] || '';
         
         card.innerHTML = `
-            <div class="portfolio-image-container">
-                <img src="${img}" alt="${p.title}" class="portfolio-image">
+            <div class="portfolio-image-container" ${img ? `style="background-image: url('${img}')"` : ''}>
                 <div class="portfolio-overlay">
                     <h3>${p.title}</h3>
                     <p>Kliknij aby zobaczyć realizacje</p>

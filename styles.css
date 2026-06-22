@@ -593,22 +593,14 @@ section {
     position: relative;
     overflow: hidden;
     height: 250px;
-}
-
-.portfolio-image {
-    position: relative;
-    overflow: hidden;
-    height: 250px;
-}
-
-.portfolio-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--secondary-black);
     transition: var(--transition);
 }
 
-.portfolio-project:hover .portfolio-image {
+.portfolio-image-container:hover {
     transform: scale(1.05);
 }
 
