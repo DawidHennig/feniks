@@ -63,12 +63,10 @@
     {
       "id": "sprzedaz_AED",
       "title": "Sprzedaż AED",
-      "images": ["projekty/sprzedaz_AED/image_1.jpg"]
-    },
-    {
-      "id": "sprzedaz_defibrylatrow",
-      "title": "Sprzedaż defibrylatorów",
-      "images": ["projekty/sprzedaz_defibrylatrow/image_1.jpg"]
+      "images": [
+        "projekty/sprzedaz_AED/image_1.jpg",
+        "projekty/sprzedaz_defibrylatrow/image_1.jpg"
+      ]
     },
     {
       "id": "sprzedaz_i_serwis_sprzetu_ppoz",
