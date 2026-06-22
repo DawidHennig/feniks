@@ -1,25 +1,15 @@
-// ===== MOBILE MENU TOGGLE =====
-/**
- * Obsługuje otwarcie/zamknięcie hamburger menu na mobilnych
- */
+// 🪶 Mobile menu toggle
 function initMobileMenu() {
     const toggle = document.getElementById('mobileMenuToggle');
     const mobileNav = document.getElementById('mobileNav');
-    const mainNav = document.getElementById('mainNav');
     
-    if (!toggle) {
-        console.log('Mobile menu toggle not found');
-        return;
-    }
+    if (!toggle) return;
     
-    // Toggle menu
     toggle.addEventListener('click', () => {
-        console.log('Toggle clicked, adding active class');
         toggle.classList.toggle('active');
         mobileNav.classList.toggle('active');
     });
     
-    // Zamknij menu przy kliknięciu na link
     document.querySelectorAll('.mobile-nav-link').forEach(link => {
         link.addEventListener('click', () => {
             toggle.classList.remove('active');
@@ -27,7 +17,6 @@ function initMobileMenu() {
         });
     });
     
-    // Zamknij menu przy resize na desktop
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
             toggle.classList.remove('active');
@@ -35,138 +24,54 @@ function initMobileMenu() {
         }
     });
 }
-
 initMobileMenu();
 
-// ===== NOTIFICATION SYSTEM =====
-/**
- * System powiadomień - wyświetla notyfikacje na dole ekranu
- * Obsługuje typy: 'success' (zielony) i 'info' (niebieski)
- */
+// 🪶 Toast notifications via CSS class + data attribute
 function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    
-    Object.assign(notification.style, {
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        padding: '16px 24px',
-        borderRadius: '8px',
-        backgroundColor: type === 'success' ? '#dc2626' : '#3b82f6',
-        color: 'white',
-        fontWeight: '500',
-        zIndex: '9999',
-        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
-        opacity: '0',
-        transform: 'translateX(100px)',
-        transition: 'all 0.3s ease-out'
-    });
-    
-    document.body.appendChild(notification);
-    
-    // Animacja wjazdu
-    setTimeout(() => {
-        notification.style.opacity = '1';
-        notification.style.transform = 'translateX(0)';
-    }, 10);
-    
-    // Usuń po 4 sekundach
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateX(100px)';
-        setTimeout(() => notification.remove(), 300);
-    }, 4000);
+    const n = document.createElement('div');
+    n.className = 'notification';
+    n.setAttribute('data-type', type);
+    n.textContent = message;
+    document.body.appendChild(n);
+    setTimeout(() => n.remove(), 4000);
 }
 
-// ===== SMOOTH SCROLL & ACTIVE NAV =====
-/**
- * Smooth scroll do sekcji przy kliknięciu na linki nawigacyjne
- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+// 🪶 Smooth scroll anchor links (native HTML behavior fallback for older browsers)
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        const t = document.querySelector(a.getAttribute('href'));
+        t?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
 
-// ===== SCROLL ANIMATIONS =====
-/**
- * Obserwuje elementy i dodaje animacji gdy wjeżdżają w viewport
- * Obsługuje: service-card, service-item, portfolio-card
- */
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const scrollObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            scrollObserver.unobserve(entry.target);
+// 🪶 Scroll animations: fade in on viewport
+const scrollObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            scrollObserver.unobserve(e.target);
         }
     });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
-document.querySelectorAll('.service-item, .portfolio-card, .stat-card, .team-member, .value-card').forEach(element => {
-    element.classList.add('scroll-animate');
-    scrollObserver.observe(element);
+document.querySelectorAll('.service-item, .portfolio-project').forEach(el => {
+    el.classList.add('scroll-animate');
+    scrollObserver.observe(el);
 });
 
-// ===== HOVER EFFECT NA SERVICE CARDS =====
-/**
- * Dodaje efekt uniesienia karty przy najechaniu myszą
- */
-function initHoverEffects() {
-    // Hover effect jest teraz obsługiwany przez CSS
-}
+// 🪶 EmailJS config
+emailjs.init("nJ5sH5Yz_HhR7t1X5");
 
-initHoverEffects();
-
-// ===== EMAIL.JS INITIALIZATION =====
-/**
- * Inicjalizuje EmailJS dla wysyłania emaili z formularza kontaktowego
- * 
- * INSTRUKCJA KONFIGURACJI:
- * 1. Utwórz bezpłatne konto na https://emailjs.com
- * 2. Skopiuj swój Public Key z ustawień
- * 3. Zastąp poniższy klucz swoim Public Key
- * 4. Skonfiguruj Email Service i Template w EmailJS dashboard
- * 5. Zaktualizuj service_feniks_contact i template_feniks_form
- * 
- * Konfiguracja EmailJS:
- * - Service Name: Gmail/Outlook/Custom (gmail_service)
- * - Template Name: feniks_contact_form
- * - Template Variables: user_name, user_email, user_phone, user_address, subject, message
- */
-emailjs.init("nJ5sH5Yz_HhR7t1X5");  // ZAMIEŃ NA SWÓJ PUBLIC KEY
-
-// ===== FORM VALIDATION =====
-/**
- * Waliduje pola formularza z feedback'iem w real-time
- * Obsługuje: email, telefon, wymagane pola
- */
+// 🪶 Form validation: HTML5 + real-time feedback
 function initFormValidation() {
-    const contactForm = document.getElementById('contactForm');
-    if (!contactForm) return;
+    const form = document.getElementById('contactForm');
+    if (!form) return;
     
-    const inputs = contactForm.querySelectorAll('input, textarea');
-    
-    // Walidacja na blur (opuszczenie pola)
-    inputs.forEach(input => {
+    form.querySelectorAll('input, textarea').forEach(input => {
         input.addEventListener('blur', () => validateField(input));
         input.addEventListener('input', () => {
-            if (input.classList.contains('invalid')) {
-                validateField(input);
-            }
+            if (input.classList.contains('invalid')) validateField(input);
         });
     });
 }
@@ -174,43 +79,33 @@ function initFormValidation() {
 function validateField(field) {
     const fieldName = field.name;
     const value = field.value.trim();
-    const errorElement = document.querySelector(`.form-error[data-field="${fieldName}"]`);
+    const error = document.querySelector(`.form-error[data-field="${fieldName}"]`);
     let isValid = true;
-    let errorMessage = '';
+    let msg = '';
     
-    // Walidacja wymaganych pól
     if (field.hasAttribute('required') && !value) {
         isValid = false;
-        errorMessage = 'To pole jest wymagane';
-    }
-    // Walidacja emaila
-    else if (field.type === 'email' && value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
+        msg = 'To pole jest wymagane';
+    } else if (field.type === 'email' && value) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
             isValid = false;
-            errorMessage = 'Podaj prawidłowy adres e-mail';
+            msg = 'Podaj prawidłowy adres e-mail';
         }
-    }
-    // Walidacja telefonu (jeśli wypełniony)
-    else if (field.type === 'tel' && value) {
-        const phoneRegex = /^[\d\s\-\+\(\)]{9,}$/;
-        if (!phoneRegex.test(value)) {
+    } else if (field.type === 'tel' && value) {
+        if (!/^[\d\s\-\+\(\)]{9,}$/.test(value)) {
             isValid = false;
-            errorMessage = 'Podaj prawidłowy numer telefonu';
+            msg = 'Podaj prawidłowy numer telefonu';
         }
     }
     
-    // Aktualizuj klasy i komunikaty
     field.classList.remove('invalid', 'valid');
-    if (errorElement) {
-        errorElement.classList.remove('show');
-    }
+    if (error) error.classList.remove('show');
     
     if (!isValid) {
         field.classList.add('invalid');
-        if (errorElement) {
-            errorElement.textContent = errorMessage;
-            errorElement.classList.add('show');
+        if (error) {
+            error.textContent = msg;
+            error.classList.add('show');
         }
     } else if (value) {
         field.classList.add('valid');
@@ -220,485 +115,215 @@ function validateField(field) {
 }
 
 function validateForm(form) {
-    const inputs = form.querySelectorAll('input[required], textarea[required], input[type="email"]');
-    let isFormValid = true;
-    
-    inputs.forEach(input => {
-        if (!validateField(input)) {
-            isFormValid = false;
-        }
+    let isValid = true;
+    form.querySelectorAll('input[required], textarea[required], input[type="email"]').forEach(input => {
+        if (!validateField(input)) isValid = false;
     });
-    
-    return isFormValid;
+    return isValid;
 }
 
 initFormValidation();
 
-// ===== FORM SUBMISSION =====
-/**
- * Obsługuje wysyłanie formularza kontaktowego poprzez EmailJS
- * Zbiera dane, waliduje pola, CAPTCHA i wysyła email
- * Obsługuje success/error notifications
- */
+// 🪶 Contact form submission: validate, send email, show toast
 function initContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        
+        if (!validateForm(form)) {
+            showNotification('Sprawdź czy wszystkie pola są prawidłowo wypełnione', 'info');
+            return;
+        }
+        
+        const btn = form.querySelector('button[type="submit"]');
+        const text = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Wysyłanie...';
+        
+        try {
+            await emailjs.send('service_feniks_contact', 'template_feniks_form', {
+                user_name: form.querySelector('input[name="user_name"]').value,
+                user_email: form.querySelector('input[name="user_email"]').value,
+                user_phone: form.querySelector('input[name="user_phone"]').value,
+                user_address: form.querySelector('input[name="user_address"]').value,
+                subject: form.querySelector('input[name="subject"]').value,
+                message: form.querySelector('textarea[name="message"]').value
+            });
             
-            // Waliduj wszystkie pola
-            if (!validateForm(contactForm)) {
-                showNotification('Sprawdź czy wszystkie pola są prawidłowo wypełnione', 'info');
-                return;
-            }
-            
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Wysyłanie...';
-            
-            try {
-                // Przygotuj dane dla EmailJS
-                const templateParams = {
-                    user_name: contactForm.querySelector('input[name="user_name"]').value,
-                    user_email: contactForm.querySelector('input[name="user_email"]').value,
-                    user_phone: contactForm.querySelector('input[name="user_phone"]').value,
-                    user_address: contactForm.querySelector('input[name="user_address"]').value,
-                    subject: contactForm.querySelector('input[name="subject"]').value,
-                    message: contactForm.querySelector('textarea[name="message"]').value
-                };
-                
-                // Wyślij email
-                const response = await emailjs.send(
-                    'service_feniks_contact',  // Service ID
-                    'template_feniks_form',     // Template ID
-                    templateParams
-                );
-                
-                console.log('Email wysłany pomyślnie:', response);
-                showNotification('✓ Dziękujemy za przesłanie wiadomości! Wkrótce się skontaktujemy.', 'success');
-                
-                // Reset formularza
-                contactForm.reset();
-                contactForm.querySelectorAll('input, textarea').forEach(field => {
-                    field.classList.remove('valid', 'invalid');
-                });
-                
-            } catch (error) {
-                console.error('Błąd wysyłania emailu:', error);
-                showNotification('Błąd wysyłania wiadomości. Spróbuj później lub skontaktuj się bezpośrednio: 663 335 998', 'info');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }
-        });
-    }
+            showNotification('✓ Dziękujemy za przesłanie wiadomości! Wkrótce się skontaktujemy.', 'success');
+            form.reset();
+            form.querySelectorAll('input, textarea').forEach(f => f.classList.remove('valid', 'invalid'));
+        } catch (err) {
+            showNotification('Błąd wysyłania wiadomości. Spróbuj później lub skontaktuj się bezpośrednio: 663 335 998', 'info');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = text;
+        }
+    });
 }
 
 initContactForm();
 
-// ===== HEADER SCROLL EFFECT =====
-/**
- * Zmienia shadow headera w zależności od pozycji scrollu
- */
+// 🪶 Header shadow on scroll
 function initHeaderScrollEffect() {
     const header = document.querySelector('.header');
     if (!header) return;
-
     window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 100) {
-            header.style.boxShadow = '0 4px 20px rgba(220, 38, 38, 0.2)';
-        } else {
-            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.5)';
-        }
+        const top = window.pageYOffset || document.documentElement.scrollTop;
+        header.style.boxShadow = top > 100 
+            ? '0 4px 20px rgba(220, 38, 38, 0.2)'
+            : '0 2px 10px rgba(0, 0, 0, 0.5)';
     });
 }
 
 initHeaderScrollEffect();
 
-// ===== LAZY LOAD IMAGES =====
-/**
- * Leniwi ładuje obrazy gdy pojawiają się w widoku
- * Wymaga atrybutu data-src na obrazach
- */
-function initLazyLoadImages() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src || img.src;
-                    img.classList.add('loaded');
-                    observer.unobserve(img);
-                }
-            });
-        });
-        
-        document.querySelectorAll('img').forEach(img => imageObserver.observe(img));
-    }
-}
-
-initLazyLoadImages();
-
-// ===== FAQ ACCORDION =====
-/**
- * Accordion widget dla FAQ - otwiera/zamyka odpowiedzi na pytania
- * Zawiera animacje i zarządzanie aria-expanded
- */
-function initFAQAccordion() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        
-        question.addEventListener('click', () => {
-            const isExpanded = question.getAttribute('aria-expanded') === 'true';
-            
-            // Zamknij wszystkie inne itemy
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                    const otherQuestion = otherItem.querySelector('.faq-question');
-                    const otherAnswer = otherItem.querySelector('.faq-answer');
-                    otherQuestion.setAttribute('aria-expanded', 'false');
-                    otherAnswer.classList.remove('active');
-                }
-            });
-            
-            // Toggle current item
-            question.setAttribute('aria-expanded', !isExpanded);
-            answer.classList.toggle('active');
-        });
-    });
-}
-
-initFAQAccordion();
-
-// ===== SERVICE MODAL =====
-/**
- * Modal do wyświetlania pełnego opisu usługi po kliknięciu
- * Pokazuje blur background i rozszerzającą się kartę
- */
+// 🪶 Service modal: click to expand service details
 function initServiceModal() {
     const modal = document.getElementById('serviceModal');
-    const closeBtn = document.getElementById('closeModal');
-    const modalBody = document.getElementById('modalBody');
+    const btn = document.getElementById('closeModal');
+    const body = document.getElementById('modalBody');
     
-    // Otwórz modal przy kliknięciu na usługę
     document.querySelectorAll('.service-item').forEach(item => {
-        item.addEventListener('click', function() {
-            const icon = this.querySelector('.service-item-icon').textContent;
-            const title = this.querySelector('h4').textContent;
+        item.addEventListener('click', () => {
+            const icon = item.querySelector('.service-item-icon').textContent;
+            const title = item.querySelector('h4').textContent;
+            let desc = '';
             
-            // Zbierz całą zawartość (paragrafów i list)
-            let description = '';
-            const children = this.querySelectorAll('p, ul, li');
-            
-            // Jeśli są listy, rebuild je prawidłowo
-            let currentList = null;
-            children.forEach(el => {
+            item.querySelectorAll('p, ul').forEach(el => {
                 if (el.tagName === 'P') {
-                    if (currentList) {
-                        description += currentList;
-                        currentList = null;
-                    }
-                    description += `<p>${el.innerHTML}</p>`;
+                    desc += `<p>${el.innerHTML}</p>`;
                 } else if (el.tagName === 'UL') {
-                    const listItems = el.querySelectorAll('li');
-                    let listHTML = '<ul style="margin: 10px 0 0 20px; padding-left: 0;">';
-                    listItems.forEach(li => {
-                        listHTML += `<li>${li.textContent}</li>`;
+                    let html = '<ul style="margin: 10px 0 0 20px; padding-left: 0;">';
+                    el.querySelectorAll('li').forEach(li => {
+                        html += `<li>${li.textContent}</li>`;
                     });
-                    listHTML += '</ul>';
-                    description += listHTML;
+                    desc += html + '</ul>';
                 }
             });
             
-            modalBody.innerHTML = `
-                <div class="modal-service-icon">${icon}</div>
-                <h3 class="modal-service-title">${title}</h3>
-                <div class="modal-service-description">${description}</div>
-            `;
-            
+            body.innerHTML = `<div class="modal-service-icon">${icon}</div><h3 class="modal-service-title">${title}</h3><div class="modal-service-description">${desc}</div>`;
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Disable scrolling
+            document.body.style.overflow = 'hidden';
         });
     });
     
-    // Zamknij modal
-    function closeModal() {
+    const closeModal = () => {
         modal.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Enable scrolling
-    }
+        document.body.style.overflow = 'auto';
+    };
     
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-    
-    // Zamknij na ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeModal();
-        }
+    btn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
 }
 
 initServiceModal();
 
-// ===== PORTFOLIO GALLERY =====
-/**
- * Obsługuje wyświetlanie galerii projektów
- * Dynamicznie wczytuje zdjęcia z katalogów projektów
- */
-
-/**
- * Lista wszystkich projektów - ładowana z projects-manifest.json
- */
+// 🪶 Portfolio gallery: load manifest, generate cards, init modal
 let allProjects = [];
 
-/**
- * Ładuje listę projektów z projects-manifest.json
- */
 async function loadProjectsManifest() {
     try {
-        console.log('[MANIFEST] Fetching projects-manifest.json...');
-        const response = await fetch('projects-manifest.json');
-        console.log('[MANIFEST] Fetch response status:', response.status);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log('[MANIFEST] Raw data:', data);
-        
-        allProjects = data.projects || [];
-        console.log('[MANIFEST] Loaded projects:', allProjects);
-        console.log('[MANIFEST] Total projects loaded:', allProjects.length);
-        return allProjects;
-    } catch (error) {
-        console.error('[MANIFEST] Error loading projects manifest:', error);
-        console.error('[MANIFEST] Error details:', error.message);
-        return [];
+        const r = await fetch('projects-manifest.json');
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        allProjects = (await r.json()).projects || [];
+    } catch (e) {
+        allProjects = [];
     }
 }
 
-/**
- * Zwraca URL placeholdera SVG
- */
-function getPlaceholderImage(projectName) {
-    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23333' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='%23999'%3EBrak zdjęć%3C/text%3E%3C/svg%3E`;
-}
-
-/**
- * Formatuje nazwę projektu na czytelną etykietę
- * montaz_klap_przeciwpozarowych -> Montaz klap przeciwpozarowych
- */
-function formatProjectName(projectName) {
-    const words = projectName.split('_');
-    return words
-        .map((word, index) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
-        .join(' ');
-}
-
-/**
- * Generuje karty portfolio z listy projektów
- */
 function generatePortfolioCards() {
-    console.log('[PORTFOLIO] generatePortfolioCards called');
-    console.log('[PORTFOLIO] allProjects:', allProjects);
+    const grid = document.getElementById('portfolioGrid');
+    if (!grid) return;
     
-    const portfolioGrid = document.getElementById('portfolioGrid');
-    console.log('[PORTFOLIO] portfolioGrid:', portfolioGrid ? 'found' : 'NOT FOUND');
-    
-    if (!portfolioGrid) {
-        console.error('[PORTFOLIO] portfolioGrid not found!');
-        return;
-    }
-    
-    console.log(`[PORTFOLIO] Generating ${allProjects.length} project cards...`);
-    
-    for (const project of allProjects) {
-        console.log('[PORTFOLIO] Processing project:', project);
-        const projectId = project.id;
-        const projectImages = project.images || [];
-        const projectTitle = project.title || formatProjectName(projectId);
-        const previewImage = projectImages.length > 0 ? projectImages[0] : getPlaceholderImage(projectId);
+    allProjects.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'portfolio-project';
+        card.setAttribute('data-project', p.id);
+        const img = p.images?.[0] || 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Crect fill=%27%23333%27 width=%27400%27 height=%27300%27/%3E%3C/svg%3E';
         
-        console.log(`[PORTFOLIO] projectId: ${projectId}, images: ${projectImages.length}, preview: ${previewImage}`);
-        
-        const projectCard = document.createElement('div');
-        projectCard.className = 'portfolio-project';
-        projectCard.setAttribute('data-project', projectId);
-        projectCard.innerHTML = `
+        card.innerHTML = `
             <div class="portfolio-image-container">
-                <img src="${previewImage}" alt="${projectTitle}" class="portfolio-image">
+                <img src="${img}" alt="${p.title}" class="portfolio-image">
                 <div class="portfolio-overlay">
-                    <h3>${projectTitle}</h3>
+                    <h3>${p.title}</h3>
                     <p>Kliknij aby zobaczyć realizacje</p>
                 </div>
             </div>
             <div class="portfolio-content">
-                <h3>${projectTitle}</h3>
+                <h3>${p.title}</h3>
             </div>
             <div class="portfolio-gallery" style="display: none;">
+            ${(p.images || []).map(img => `<img src="${img}" alt="${p.title}">`).join('')}
             </div>
         `;
-        
-        portfolioGrid.appendChild(projectCard);
-        console.log(`[PORTFOLIO] Created card: ${projectId}`);
-        
-        // Dodaj wszystkie obrazy do galerii
-        const gallery = projectCard.querySelector('.portfolio-gallery');
-        projectImages.forEach((imagePath, idx) => {
-            const img = document.createElement('img');
-            img.src = imagePath;
-            img.alt = `${projectTitle} - Zdjęcie ${idx + 1}`;
-            gallery.appendChild(img);
-            console.log(`[PORTFOLIO] Added image: ${imagePath}`);
-        });
-    }
-    
-    console.log('[PORTFOLIO] All portfolio cards generated!');
+        grid.appendChild(card);
+    });
 }
 
-/**
- * Mapa projektów do nazw plików zdjęć
- * Umożliwia elastyczną obsługę różnych konwencji nazewnictwa
- */
-
 function initPortfolioGallery() {
-    const projects = document.querySelectorAll('.portfolio-project');
-    console.log(`[CLICK] Setting up click handlers for ${projects.length} projects`);
-    
-    projects.forEach((project, idx) => {
-        project.addEventListener('click', function(e) {
-            console.log(`[CLICK] Portfolio card ${idx} clicked!`);
-            e.stopPropagation();
+    document.querySelectorAll('.portfolio-project').forEach(project => {
+        project.addEventListener('click', () => {
+            const imgs = Array.from(project.querySelector('.portfolio-gallery').querySelectorAll('img')).map(i => i.src);
+            const title = project.querySelector('.portfolio-overlay h3').textContent;
             
-            const gallery = this.querySelector('.portfolio-gallery');
-            const images = gallery ? gallery.querySelectorAll('img') : [];
-            const title = this.querySelector('.portfolio-overlay h3').textContent;
+            if (!imgs.length) return;
             
-            console.log(`[CLICK] Gallery element found: ${!!gallery}`);
-            console.log(`[CLICK] Images in gallery: ${images.length}`);
-            console.log(`[CLICK] Title: ${title}`);
-            
-            if (images.length === 0) {
-                console.error('[CLICK] ERROR: No images found in gallery!');
-                console.error('[CLICK] Gallery HTML:', gallery ? gallery.innerHTML : 'NO GALLERY');
-                return;
-            }
-            
-            // Zbierz wszystkie obrazy z galerii
-            const imageSources = Array.from(images).map(img => img.src);
-            console.log(`[CLICK] Image sources:`, imageSources);
-            
-            // Stwórz modal dla galerii
-            const galleryModal = document.createElement('div');
-            galleryModal.className = 'gallery-modal';
-            galleryModal.innerHTML = `
+            const modal = document.createElement('div');
+            modal.className = 'gallery-modal';
+            modal.innerHTML = `
                 <div class="gallery-modal-content">
                     <button class="gallery-close-btn">&times;</button>
                     <div class="gallery-container">
                         <div class="gallery-main">
-                            <img src="${imageSources[0]}" alt="${title}" class="gallery-main-image">
+                            <img src="${imgs[0]}" alt="${title}" class="gallery-main-image">
                         </div>
-                        <div class="gallery-title">
-                            <h2>${title}</h2>
-                        </div>
-                        ${imageSources.length > 1 ? `
-                            <div class="gallery-thumbnails">
-                                ${imageSources.map((imgSrc, idx) => `
-                                    <img src="${imgSrc}" alt="Zdjęcie ${idx + 1}" class="gallery-thumb" data-index="${idx}">
-                                `).join('')}
-                            </div>
-                        ` : ''}
+                        <div class="gallery-title"><h2>${title}</h2></div>
+                        ${imgs.length > 1 ? `<div class="gallery-thumbnails">${imgs.map((i, idx) => `<img src="${i}" alt="Zdjęcie ${idx+1}" class="gallery-thumb${idx === 0 ? ' active' : ''}" data-index="${idx}">`).join('')}</div>` : ''}
                     </div>
                 </div>
             `;
             
-            document.body.appendChild(galleryModal);
+            document.body.appendChild(modal);
             document.body.style.overflow = 'hidden';
-            console.log('[CLICK] Modal created and added to DOM');
             
-            // Obsługa zmiany zdjęcia po kliknięciu na miniaturę
-            const thumbnails = galleryModal.querySelectorAll('.gallery-thumb');
-            const mainImage = galleryModal.querySelector('.gallery-main-image');
-            
-            thumbnails.forEach(thumb => {
-                thumb.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const index = thumb.dataset.index;
-                    mainImage.src = imageSources[index];
-                    
-                    // Usuń active z poprzedniej miniatury
-                    galleryModal.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+            const main = modal.querySelector('.gallery-main-image');
+            modal.querySelectorAll('.gallery-thumb').forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    const idx = thumb.dataset.index;
+                    main.src = imgs[idx];
+                    modal.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
                     thumb.classList.add('active');
                 });
             });
             
-            // Ustaw pierwszą miniaturę jako aktywną
-            if (thumbnails.length > 0) {
-                thumbnails[0].classList.add('active');
-            }
-            
-            // Zamknij modal
-            const closeBtn = galleryModal.querySelector('.gallery-close-btn');
-            closeBtn.addEventListener('click', () => {
-                galleryModal.remove();
+            const closeIt = () => {
+                modal.remove();
                 document.body.style.overflow = 'auto';
-                console.log('[CLICK] Modal closed via close button');
-            });
+            };
             
-            galleryModal.addEventListener('click', (e) => {
-                if (e.target === galleryModal) {
-                    galleryModal.remove();
-                    document.body.style.overflow = 'auto';
-                    console.log('[CLICK] Modal closed via background click');
-                }
-            });
-            
-            // Zamknij na ESC
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && galleryModal.parentElement) {
-                    galleryModal.remove();
-                    document.body.style.overflow = 'auto';
-                    console.log('[CLICK] Modal closed via ESC key');
-                }
-            });
+            modal.querySelector('.gallery-close-btn').addEventListener('click', closeIt);
+            modal.addEventListener('click', e => { if (e.target === modal) closeIt(); });
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && modal.parentElement) closeIt();
+            }, { once: true });
         });
     });
 }
 
-// ===== INIT PORTFOLIO =====
-// Ładuj manifest i inicjalizuj portfolio
 async function initPortfolio() {
-    console.log('[INIT] Starting portfolio initialization...');
-    
-    // Ładuj manifest projeków
     await loadProjectsManifest();
-    console.log('[INIT] Manifest loaded!');
-    
-    // Generuj karty portfolio
     generatePortfolioCards();
-    console.log('[INIT] Portfolio cards generated!');
-    
-    // Po wygenerowaniu kart ustaw click handler
     initPortfolioGallery();
-    console.log('[INIT] Click handlers attached!');
 }
 
-// Inicjalizuj portfolio gdy strona się załaduje
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initPortfolio);
 } else {
     initPortfolio();
 }
-
-// ===== INIT & LOG =====
-console.log('FENIKS - Strona załadowana pomyślnie! 🚀');
