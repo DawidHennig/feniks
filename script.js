@@ -60,9 +60,6 @@ document.querySelectorAll('.service-item, .portfolio-project').forEach(el => {
     scrollObserver.observe(el);
 });
 
-// 🪶 EmailJS config
-emailjs.init("nJ5sH5Yz_HhR7t1X5");
-
 // 🪶 Form validation: HTML5 + real-time feedback
 function initFormValidation() {
     const form = document.getElementById('contactForm');
@@ -124,43 +121,24 @@ function validateForm(form) {
 
 initFormValidation();
 
-// 🪶 Contact form submission: validate, send email, show toast
+// 🪶 Contact form submission: validate before submit
 function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
     
-    form.addEventListener('submit', async e => {
-        e.preventDefault();
-        
+    form.addEventListener('submit', e => {
         if (!validateForm(form)) {
+            e.preventDefault();
             showNotification('Sprawdź czy wszystkie pola są prawidłowo wypełnione', 'info');
-            return;
+            return false;
         }
         
         const btn = form.querySelector('button[type="submit"]');
-        const text = btn.textContent;
         btn.disabled = true;
         btn.textContent = 'Wysyłanie...';
         
-        try {
-            await emailjs.send('service_feniks_contact', 'template_feniks_form', {
-                user_name: form.querySelector('input[name="user_name"]').value,
-                user_email: form.querySelector('input[name="user_email"]').value,
-                user_phone: form.querySelector('input[name="user_phone"]').value,
-                user_address: form.querySelector('input[name="user_address"]').value,
-                subject: form.querySelector('input[name="subject"]').value,
-                message: form.querySelector('textarea[name="message"]').value
-            });
-            
-            showNotification('✓ Dziękujemy za przesłanie wiadomości! Wkrótce się skontaktujemy.', 'success');
-            form.reset();
-            form.querySelectorAll('input, textarea').forEach(f => f.classList.remove('valid', 'invalid'));
-        } catch (err) {
-            showNotification('Błąd wysyłania wiadomości. Spróbuj później lub skontaktuj się bezpośrednio: 663 335 998', 'info');
-        } finally {
-            btn.disabled = false;
-            btn.textContent = text;
-        }
+        showNotification('✓ Dziękujemy za przesłanie wiadomości! Wkrótce się skontaktujemy.', 'success');
+        // FormSubmit.co će handle form submission and redirect
     });
 }
 
