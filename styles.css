@@ -102,9 +102,9 @@
     color: #e8e8e8 !important;
 }
 
-/* Services section: Darker teal - MATCHES PORTFOLIO */
+/* Services section: Lighter teal - MATCHES PORTFOLIO */
 .easter-theme .full-services {
-    background-color: #6ba399 !important;
+    background-color: #7eb8ad !important;
 }
 
 .easter-theme .full-services .section-title {
@@ -113,21 +113,21 @@
 
 .easter-theme .service-item {
     background-color: rgba(255, 255, 255, 0.85) !important;
-    border: 2px solid #8bc9b8 !important;
+    border: 2px solid #a5d5cc !important;
     color: #2c2c2c !important;
 }
 
 .easter-theme .service-item h4 {
-    color: #2d6a5e !important;
+    color: #3d7a70 !important;
 }
 
 .easter-theme .service-item p {
     color: #3d3d3d !important;
 }
 
-/* Portfolio section: Darker pastel green/teal */
+/* Portfolio section: Lighter pastel teal */
 .easter-theme .portfolio-section {
-    background-color: #6ba399 !important;
+    background-color: #7eb8ad !important;
 }
 
 .easter-theme .portfolio-section .section-title {
@@ -182,9 +182,9 @@
     color: #c84c3b !important;
 }
 
-/* Footer: Darker pastel blue */
+/* Footer: Lighter pastel teal */
 .easter-theme .footer {
-    background-color: #5b8fc4 !important;
+    background-color: #7eb8ad !important;
     color: #f5f5f5 !important;
 }
 
