@@ -121,10 +121,43 @@ function validateForm(form) {
 
 initFormValidation();
 
+// 🪶 Winner lottery: 1% chance per form load
+function generateWinnerTicket() {
+    const seed = Math.random().toString() + Date.now().toString();
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) {
+        const char = seed.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return (Math.abs(hash) % 100) < 1;
+}
+
+function showWinnerPopup() {
+    const popup = document.getElementById('winnerPopup');
+    if (!popup) return;
+    popup.style.display = 'flex';
+    popup.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+}
+
 // 🪶 Contact form submission: validate before submit
 function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
+    
+    // Generate winner ticket on form load
+    const isWinner = generateWinnerTicket();
+    const winnerField = document.getElementById('winnerField');
+    if (winnerField) {
+        winnerField.value = isWinner ? 'true' : 'false';
+    }
+    
+    // Show popup if winner
+    if (isWinner) {
+        showWinnerPopup();
+    }
     
     form.addEventListener('submit', e => {
         if (!validateForm(form)) {

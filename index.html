@@ -333,10 +333,13 @@
                 </div>
 
                 <form class="contact-form" id="contactForm" method="POST" action="https://formsubmit.co/feniks.kontakt@gmail.com" novalidate>
+                    <!-- Winner field (hidden) -->
+                    <input type="hidden" name="winner" id="winnerField" value="false">
+                    
                     <div class="form-group">
-                        <input type="text" name="user_name" placeholder="Imię *" required>
-                        <span class="form-error" data-field="user_name"></span>
-                    </div>
+                         <input type="text" name="user_name" placeholder="Imię *" required>
+                         <span class="form-error" data-field="user_name"></span>
+                     </div>
                     <div class="form-group">
                         <input type="email" name="user_email" placeholder="E-mail *" required>
                         <span class="form-error" data-field="user_email"></span>
@@ -353,12 +356,21 @@
                         <input type="text" name="subject" placeholder="Temat *" required>
                         <span class="form-error" data-field="subject"></span>
                     </div>
-                    <div class="form-group">
-                        <textarea name="message" placeholder="Wiadomość *" rows="5" required></textarea>
-                        <span class="form-error" data-field="message"></span>
+                     <div class="form-group">
+                         <textarea name="message" placeholder="Wiadomość *" rows="5" required></textarea>
+                         <span class="form-error" data-field="message"></span>
+                      </div>
+                      <button type="submit" class="cta-button">Wyślij</button>
+                 </form>
+                 
+                 <!-- Winner Popup -->
+                 <div id="winnerPopup" class="winner-popup" style="display: none;">
+                     <div class="winner-content">
+                         <h2 class="winner-title">🎉 !WINNERWINNERCHICKENDINNER! 🎉</h2>
+                         <p class="winner-text">Gratulacje! Wygrałeś darmową gaśnicę!</p>
+                         <p class="winner-small">Szczegóły nagrody wyślemy na Twój email.</p>
                      </div>
-                     <button type="submit" class="cta-button">Wyślij</button>
-                </form>
+                 </div>
             </div>
         </div>
     </section>
