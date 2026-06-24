@@ -158,16 +158,19 @@
     color: #7c5a35 !important;
 }
 
-/* Contact form: Light background */
+/* Contact form: Pastel amber background */
 .easter-theme .contact-form {
-    background-color: rgba(255, 255, 255, 0.9) !important;
+    background-color: rgba(201, 165, 101, 0.15) !important;
+    border: 2px solid #ddb892 !important;
+    border-radius: 12px !important;
+    padding: 30px !important;
 }
 
 .easter-theme .form-group input,
 .easter-theme .form-group textarea {
-    background-color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.7) !important;
     color: #2c2c2c !important;
-    border: 2px solid #c9a565 !important;
+    border: 2px solid #ddb892 !important;
 }
 
 .easter-theme .form-group input::placeholder,
