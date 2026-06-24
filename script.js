@@ -1,7 +1,8 @@
 // 🪶 Seasonal Christmas theme (December + early January)
+// ponytail: TEST MODE - comment out `|| true` before production
 function initChristmasTheme() {
     const month = new Date().getMonth() + 1;
-    if (month !== 12 && month !== 1) return; // Only Dec & Jan
+    if (month !== 12 && month !== 1 && !true) return; // Only Dec & Jan (|| true = ALWAYS for testing)
     
     // Always ensure theme class is set
     document.documentElement.classList.add('christmas-theme');
