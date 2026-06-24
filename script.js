@@ -3,7 +3,11 @@ function initChristmasTheme() {
     const month = new Date().getMonth() + 1;
     if (month !== 12 && month !== 1) return; // Only Dec & Jan
     
+    // Always ensure theme class is set
     document.documentElement.classList.add('christmas-theme');
+    
+    // Remove old snowfall if exists (in case of re-init)
+    document.querySelectorAll('.snowfall').forEach(el => el.remove());
     
     // Create snowfall
     const snowContainer = document.createElement('div');
@@ -20,20 +24,35 @@ function initChristmasTheme() {
         snowContainer.appendChild(snowflake);
     }
     
-    // Add festive emoji to titles
+    // Add festive emoji to titles - refresh on each call
     const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
+    if (heroTitle && !heroTitle.textContent.includes('🎄')) {
         heroTitle.textContent = '🎄 ' + heroTitle.textContent + ' 🎄';
     }
     
     const sectionTitles = document.querySelectorAll('.section-title');
     const emojis = ['❄️', '🎁', '🎅'];
     sectionTitles.forEach((title, idx) => {
-        const emoji = emojis[idx % emojis.length];
-        title.textContent = emoji + ' ' + title.textContent + ' ' + emoji;
+        if (!title.textContent.includes(emojis[idx % emojis.length])) {
+            const emoji = emojis[idx % emojis.length];
+            title.textContent = emoji + ' ' + title.textContent + ' ' + emoji;
+        }
     });
 }
-initChristmasTheme();
+
+// Wait for DOM to be fully loaded before init
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChristmasTheme);
+} else {
+    initChristmasTheme();
+}
+
+// Re-check every 5 seconds to keep snowfall alive if needed
+setInterval(() => {
+    if (document.querySelector('.snowfall') === null) {
+        initChristmasTheme();
+    }
+}, 5000);
 
 // 🪶 Mobile menu toggle
 function initMobileMenu() {
