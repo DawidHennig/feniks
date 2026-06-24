@@ -63,6 +63,167 @@
     filter: drop-shadow(0 0 8px rgba(244, 114, 182, 0.4));
 }
 
+/* 🐰 AGGRESSIVE EASTER THEME OVERRIDES - FULL PAGE MAKEOVER */
+.easter-theme {
+    /* Background: Pastel gradient */
+    background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%) !important;
+}
+
+.easter-theme body {
+    background-color: transparent !important;
+    color: #3d3d3d !important;
+}
+
+/* Header: Pastel pink */
+.easter-theme .header {
+    background-color: #f472b6 !important;
+    border-bottom: 3px solid #fcd34d !important;
+    box-shadow: 0 4px 15px rgba(244, 114, 182, 0.3) !important;
+}
+
+.easter-theme .header a,
+.easter-theme .nav-link,
+.easter-theme .phone-link,
+.easter-theme .phone-text {
+    color: white !important;
+}
+
+/* Hero section: Pastel yellow */
+.easter-theme .hero {
+    background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%) !important;
+}
+
+.easter-theme .hero-title {
+    color: #7c2d12 !important;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5) !important;
+}
+
+.easter-theme .hero-subtitle {
+    color: #92400e !important;
+}
+
+/* Services section: Pastel blue */
+.easter-theme .full-services {
+    background-color: #93c5fd !important;
+}
+
+.easter-theme .full-services .section-title {
+    color: #1e3a8a !important;
+}
+
+.easter-theme .service-item {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: 2px solid #bfdbfe !important;
+    color: #2c3e50 !important;
+}
+
+.easter-theme .service-item h4 {
+    color: #1e3a8a !important;
+}
+
+.easter-theme .service-item p {
+    color: #3d3d3d !important;
+}
+
+/* Portfolio section: Pastel green */
+.easter-theme .portfolio-section {
+    background-color: #86efac !important;
+}
+
+.easter-theme .portfolio-section .section-title {
+    color: #15803d !important;
+}
+
+.easter-theme .portfolio-section .section-subtitle {
+    color: #166534 !important;
+}
+
+/* Contact section: Pastel pink again */
+.easter-theme .contact-section {
+    background-color: #f9a8d4 !important;
+}
+
+.easter-theme .contact-section .section-title {
+    color: #7c2d12 !important;
+}
+
+.easter-theme .contact-info {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid #fbcfe8 !important;
+    color: #2c3e50 !important;
+}
+
+.easter-theme .contact-info h3,
+.easter-theme .contact-info a {
+    color: #be123c !important;
+}
+
+/* Contact form: Light background */
+.easter-theme .contact-form {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.easter-theme .form-group input,
+.easter-theme .form-group textarea {
+    background-color: #fff !important;
+    color: #2c3e50 !important;
+    border: 2px solid #fcd34d !important;
+}
+
+.easter-theme .form-group input::placeholder,
+.easter-theme .form-group textarea::placeholder {
+    color: #999 !important;
+}
+
+.easter-theme .form-error {
+    color: #dc2626 !important;
+}
+
+/* Footer: Pastel blue */
+.easter-theme .footer {
+    background-color: #bfdbfe !important;
+    color: #1e3a8a !important;
+}
+
+.easter-theme .footer a {
+    color: #1e3a8a !important;
+}
+
+.easter-theme .footer a:hover {
+    color: #f472b6 !important;
+}
+
+/* Text colors globally */
+.easter-theme h1,
+.easter-theme h2,
+.easter-theme h3,
+.easter-theme h4 {
+    color: #7c2d12 !important;
+}
+
+.easter-theme p,
+.easter-theme li {
+    color: #3d3d3d !important;
+}
+
+/* Modal styling */
+.easter-theme .gallery-modal {
+    background: rgba(244, 114, 182, 0.9) !important;
+}
+
+.easter-theme .gallery-modal-content {
+    background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 100%) !important;
+}
+
+.easter-theme .gallery-close-btn {
+    color: #7c2d12 !important;
+}
+
+.easter-theme .gallery-main-image,
+.easter-theme .gallery-thumb {
+    border: 2px solid #fcd34d !important;
+}
+
 /* ===== CUSTOM SCROLLBAR ===== */
 /* Hide scrollbar but keep functionality */
 /* Webkit browsers (Chrome, Safari, Edge) */
