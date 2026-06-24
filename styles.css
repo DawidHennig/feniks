@@ -52,7 +52,7 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
+    z-index: 500;
 }
 
 .easter-egg {
@@ -63,168 +63,10 @@
     filter: drop-shadow(0 0 8px rgba(244, 114, 182, 0.4));
 }
 
-/* 🐰 AGGRESSIVE EASTER THEME OVERRIDES - FULL PAGE MAKEOVER */
+/* 🐰 SIMPLE EASTER THEME - Just change accent color */
 .easter-theme {
-    /* Background: Darker pastel gradient */
-    background: linear-gradient(135deg, #d4a574 0%, #c4559f 50%, #5b8fc4 100%) !important;
-}
-
-.easter-theme body {
-    background-color: transparent !important;
-    color: #2c2c2c !important;
-}
-
-/* Header: Darker pastel pink/rose */
-.easter-theme .header {
-    background-color: #c9547b !important;
-    border-bottom: 3px solid #d4a574 !important;
-    box-shadow: 0 4px 15px rgba(201, 84, 123, 0.4) !important;
-}
-
-.easter-theme .header a,
-.easter-theme .nav-link,
-.easter-theme .phone-link,
-.easter-theme .phone-text {
-    color: white !important;
-}
-
-/* Hero section: Darker pastel yellow/amber */
-.easter-theme .hero {
-    background: linear-gradient(135deg, #c9a565 0%, #a87f3c 100%) !important;
-}
-
-.easter-theme .hero-title {
-    color: #f5f5f5 !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
-}
-
-.easter-theme .hero-subtitle {
-    color: #e8e8e8 !important;
-}
-
-/* Services section: Lighter teal - MATCHES PORTFOLIO */
-.easter-theme .full-services {
-    background-color: #7eb8ad !important;
-}
-
-.easter-theme .full-services .section-title {
-    color: #f5f5f5 !important;
-}
-
-.easter-theme .service-item {
-    background-color: rgba(255, 255, 255, 0.85) !important;
-    border: 2px solid #a5d5cc !important;
-    color: #2c2c2c !important;
-}
-
-.easter-theme .service-item h4 {
-    color: #3d7a70 !important;
-}
-
-.easter-theme .service-item p {
-    color: #3d3d3d !important;
-}
-
-/* Portfolio section: Lighter pastel teal */
-.easter-theme .portfolio-section {
-    background-color: #7eb8ad !important;
-}
-
-.easter-theme .portfolio-section .section-title {
-    color: #f5f5f5 !important;
-}
-
-.easter-theme .portfolio-section .section-subtitle {
-    color: #e8e8e8 !important;
-}
-
-/* Contact section: Darker amber - MATCHES HERO */
-.easter-theme .contact-section {
-    background-color: #c9a565 !important;
-}
-
-.easter-theme .contact-section .section-title {
-    color: #f5f5f5 !important;
-}
-
-.easter-theme .contact-info {
-    background-color: rgba(255, 255, 255, 0.7) !important;
-    border: 2px solid #ddb892 !important;
-    color: #2c2c2c !important;
-}
-
-.easter-theme .contact-info h3,
-.easter-theme .contact-info a {
-    color: #7c5a35 !important;
-}
-
-/* Contact form: Pastel amber background */
-.easter-theme .contact-form {
-    background-color: rgba(201, 165, 101, 0.15) !important;
-    border: 2px solid #ddb892 !important;
-    border-radius: 12px !important;
-    padding: 30px !important;
-}
-
-.easter-theme .form-group input,
-.easter-theme .form-group textarea {
-    background-color: rgba(255, 255, 255, 0.7) !important;
-    color: #2c2c2c !important;
-    border: 2px solid #ddb892 !important;
-}
-
-.easter-theme .form-group input::placeholder,
-.easter-theme .form-group textarea::placeholder {
-    color: #888 !important;
-}
-
-.easter-theme .form-error {
-    color: #c84c3b !important;
-}
-
-/* Footer: Lighter pastel teal */
-.easter-theme .footer {
-    background-color: #7eb8ad !important;
-    color: #f5f5f5 !important;
-}
-
-.easter-theme .footer a {
-    color: #f5f5f5 !important;
-}
-
-.easter-theme .footer a:hover {
-    color: #d4a574 !important;
-}
-
-/* Text colors globally */
-.easter-theme h1,
-.easter-theme h2,
-.easter-theme h3,
-.easter-theme h4 {
-    color: #2c2c2c !important;
-}
-
-.easter-theme p,
-.easter-theme li {
-    color: #3d3d3d !important;
-}
-
-/* Modal styling */
-.easter-theme .gallery-modal {
-    background: rgba(201, 84, 123, 0.85) !important;
-}
-
-.easter-theme .gallery-modal-content {
-    background: linear-gradient(135deg, #c9a565 0%, #c9547b 100%) !important;
-}
-
-.easter-theme .gallery-close-btn {
-    color: #f5f5f5 !important;
-}
-
-.easter-theme .gallery-main-image,
-.easter-theme .gallery-thumb {
-    border: 2px solid #d4a574 !important;
+    --accent-red: #c9a565;
+    --accent-red-hover: #a87f3c;
 }
 
 /* ===== CUSTOM SCROLLBAR ===== */
