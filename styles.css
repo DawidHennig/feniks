@@ -102,9 +102,9 @@
     color: #e8e8e8 !important;
 }
 
-/* Services section: Darker pastel blue */
+/* Services section: Darker teal - MATCHES PORTFOLIO */
 .easter-theme .full-services {
-    background-color: #5b8fc4 !important;
+    background-color: #6ba399 !important;
 }
 
 .easter-theme .full-services .section-title {
@@ -113,12 +113,12 @@
 
 .easter-theme .service-item {
     background-color: rgba(255, 255, 255, 0.85) !important;
-    border: 2px solid #8bb3e0 !important;
+    border: 2px solid #8bc9b8 !important;
     color: #2c2c2c !important;
 }
 
 .easter-theme .service-item h4 {
-    color: #2d5a8c !important;
+    color: #2d6a5e !important;
 }
 
 .easter-theme .service-item p {
