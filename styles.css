@@ -65,20 +65,20 @@
 
 /* 🐰 AGGRESSIVE EASTER THEME OVERRIDES - FULL PAGE MAKEOVER */
 .easter-theme {
-    /* Background: Pastel gradient */
-    background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #dbeafe 100%) !important;
+    /* Background: Darker pastel gradient */
+    background: linear-gradient(135deg, #d4a574 0%, #c4559f 50%, #5b8fc4 100%) !important;
 }
 
 .easter-theme body {
     background-color: transparent !important;
-    color: #3d3d3d !important;
+    color: #2c2c2c !important;
 }
 
-/* Header: Pastel pink */
+/* Header: Darker pastel pink/rose */
 .easter-theme .header {
-    background-color: #f472b6 !important;
-    border-bottom: 3px solid #fcd34d !important;
-    box-shadow: 0 4px 15px rgba(244, 114, 182, 0.3) !important;
+    background-color: #c9547b !important;
+    border-bottom: 3px solid #d4a574 !important;
+    box-shadow: 0 4px 15px rgba(201, 84, 123, 0.4) !important;
 }
 
 .easter-theme .header a,
@@ -88,109 +88,109 @@
     color: white !important;
 }
 
-/* Hero section: Pastel yellow */
+/* Hero section: Darker pastel yellow/amber */
 .easter-theme .hero {
-    background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%) !important;
+    background: linear-gradient(135deg, #c9a565 0%, #a87f3c 100%) !important;
 }
 
 .easter-theme .hero-title {
-    color: #7c2d12 !important;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5) !important;
+    color: #f5f5f5 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 .easter-theme .hero-subtitle {
-    color: #92400e !important;
+    color: #e8e8e8 !important;
 }
 
-/* Services section: Pastel blue */
+/* Services section: Darker pastel blue */
 .easter-theme .full-services {
-    background-color: #93c5fd !important;
+    background-color: #5b8fc4 !important;
 }
 
 .easter-theme .full-services .section-title {
-    color: #1e3a8a !important;
+    color: #f5f5f5 !important;
 }
 
 .easter-theme .service-item {
-    background-color: rgba(255, 255, 255, 0.9) !important;
-    border: 2px solid #bfdbfe !important;
-    color: #2c3e50 !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border: 2px solid #8bb3e0 !important;
+    color: #2c2c2c !important;
 }
 
 .easter-theme .service-item h4 {
-    color: #1e3a8a !important;
+    color: #2d5a8c !important;
 }
 
 .easter-theme .service-item p {
     color: #3d3d3d !important;
 }
 
-/* Portfolio section: Pastel green */
+/* Portfolio section: Darker pastel green/teal */
 .easter-theme .portfolio-section {
-    background-color: #86efac !important;
+    background-color: #6ba399 !important;
 }
 
 .easter-theme .portfolio-section .section-title {
-    color: #15803d !important;
+    color: #f5f5f5 !important;
 }
 
 .easter-theme .portfolio-section .section-subtitle {
-    color: #166534 !important;
+    color: #e8e8e8 !important;
 }
 
-/* Contact section: Pastel pink again */
+/* Contact section: Darker pastel plum/mauve */
 .easter-theme .contact-section {
-    background-color: #f9a8d4 !important;
+    background-color: #9b7ebd !important;
 }
 
 .easter-theme .contact-section .section-title {
-    color: #7c2d12 !important;
+    color: #f5f5f5 !important;
 }
 
 .easter-theme .contact-info {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    border: 2px solid #fbcfe8 !important;
-    color: #2c3e50 !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: 2px solid #b5a5d0 !important;
+    color: #2c2c2c !important;
 }
 
 .easter-theme .contact-info h3,
 .easter-theme .contact-info a {
-    color: #be123c !important;
+    color: #5a3f6d !important;
 }
 
 /* Contact form: Light background */
 .easter-theme .contact-form {
-    background-color: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .easter-theme .form-group input,
 .easter-theme .form-group textarea {
     background-color: #fff !important;
-    color: #2c3e50 !important;
-    border: 2px solid #fcd34d !important;
+    color: #2c2c2c !important;
+    border: 2px solid #c9a565 !important;
 }
 
 .easter-theme .form-group input::placeholder,
 .easter-theme .form-group textarea::placeholder {
-    color: #999 !important;
+    color: #888 !important;
 }
 
 .easter-theme .form-error {
-    color: #dc2626 !important;
+    color: #c84c3b !important;
 }
 
-/* Footer: Pastel blue */
+/* Footer: Darker pastel blue */
 .easter-theme .footer {
-    background-color: #bfdbfe !important;
-    color: #1e3a8a !important;
+    background-color: #5b8fc4 !important;
+    color: #f5f5f5 !important;
 }
 
 .easter-theme .footer a {
-    color: #1e3a8a !important;
+    color: #f5f5f5 !important;
 }
 
 .easter-theme .footer a:hover {
-    color: #f472b6 !important;
+    color: #d4a574 !important;
 }
 
 /* Text colors globally */
@@ -198,7 +198,7 @@
 .easter-theme h2,
 .easter-theme h3,
 .easter-theme h4 {
-    color: #7c2d12 !important;
+    color: #2c2c2c !important;
 }
 
 .easter-theme p,
@@ -208,20 +208,20 @@
 
 /* Modal styling */
 .easter-theme .gallery-modal {
-    background: rgba(244, 114, 182, 0.9) !important;
+    background: rgba(201, 84, 123, 0.85) !important;
 }
 
 .easter-theme .gallery-modal-content {
-    background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 100%) !important;
+    background: linear-gradient(135deg, #c9a565 0%, #c9547b 100%) !important;
 }
 
 .easter-theme .gallery-close-btn {
-    color: #7c2d12 !important;
+    color: #f5f5f5 !important;
 }
 
 .easter-theme .gallery-main-image,
 .easter-theme .gallery-thumb {
-    border: 2px solid #fcd34d !important;
+    border: 2px solid #d4a574 !important;
 }
 
 /* ===== CUSTOM SCROLLBAR ===== */
