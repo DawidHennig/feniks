@@ -138,9 +138,9 @@
     color: #e8e8e8 !important;
 }
 
-/* Contact section: Darker pastel plum/mauve */
+/* Contact section: Darker blue - MATCHES SERVICES */
 .easter-theme .contact-section {
-    background-color: #9b7ebd !important;
+    background-color: #5b8fc4 !important;
 }
 
 .easter-theme .contact-section .section-title {
@@ -149,13 +149,13 @@
 
 .easter-theme .contact-info {
     background-color: rgba(255, 255, 255, 0.9) !important;
-    border: 2px solid #b5a5d0 !important;
+    border: 2px solid #8bb3e0 !important;
     color: #2c2c2c !important;
 }
 
 .easter-theme .contact-info h3,
 .easter-theme .contact-info a {
-    color: #5a3f6d !important;
+    color: #2d5a8c !important;
 }
 
 /* Contact form: Light background */
