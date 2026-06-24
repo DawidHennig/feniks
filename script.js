@@ -1,3 +1,40 @@
+// 🪶 Seasonal Christmas theme (December + early January)
+function initChristmasTheme() {
+    const month = new Date().getMonth() + 1;
+    if (month !== 12 && month !== 1) return; // Only Dec & Jan
+    
+    document.documentElement.classList.add('christmas-theme');
+    
+    // Create snowfall
+    const snowContainer = document.createElement('div');
+    snowContainer.className = 'snowfall';
+    document.body.appendChild(snowContainer);
+    
+    for (let i = 0; i < 50; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.textContent = '❄';
+        snowflake.style.left = Math.random() * 100 + '%';
+        snowflake.style.animationDelay = Math.random() * 2 + 's';
+        snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        snowContainer.appendChild(snowflake);
+    }
+    
+    // Add festive emoji to titles
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        heroTitle.textContent = '🎄 ' + heroTitle.textContent + ' 🎄';
+    }
+    
+    const sectionTitles = document.querySelectorAll('.section-title');
+    const emojis = ['❄️', '🎁', '🎅'];
+    sectionTitles.forEach((title, idx) => {
+        const emoji = emojis[idx % emojis.length];
+        title.textContent = emoji + ' ' + title.textContent + ' ' + emoji;
+    });
+}
+initChristmasTheme();
+
 // 🪶 Mobile menu toggle
 function initMobileMenu() {
     const toggle = document.getElementById('mobileMenuToggle');

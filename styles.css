@@ -10,6 +10,44 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 🎄 Christmas Theme Variables */
+.christmas-theme {
+    --accent-green: #15803d;
+    --accent-green-hover: #166534;
+    --accent-gold: #fbbf24;
+}
+
+/* 🎄 Snowfall Animation */
+@keyframes snowfall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.snowfall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.snowflake {
+    position: absolute;
+    color: #ffffff;
+    font-size: 1.5rem;
+    opacity: 0.8;
+    animation: snowfall linear forwards;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
 /* ===== CUSTOM SCROLLBAR ===== */
 /* Hide scrollbar but keep functionality */
 /* Webkit browsers (Chrome, Safari, Edge) */
@@ -448,6 +486,26 @@ body {
     background-color: var(--accent-red);
     color: var(--white);
     border-color: var(--accent-red-hover);
+}
+
+/* 🎄 Christmas CTA Button Overrides */
+.christmas-theme .cta-primary {
+    background-color: var(--accent-green);
+    color: var(--white);
+}
+
+.christmas-theme .cta-primary:hover {
+    background-color: var(--accent-green-hover);
+}
+
+.christmas-theme .cta-secondary {
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+
+.christmas-theme .cta-secondary:hover {
+    background-color: var(--accent-green);
+    border-color: var(--accent-green-hover);
 }
 
 /* ===== SEKCJE ===== */
