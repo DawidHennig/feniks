@@ -1,3 +1,58 @@
+// 🪶 Seasonal Easter theme (March + April)
+// ponytail: TEST MODE - comment out `|| true` before production
+function initEasterTheme() {
+    const month = new Date().getMonth() + 1;
+    if (month !== 3 && month !== 4 && !true) return; // Only Mar & Apr (|| true = ALWAYS for testing)
+    
+    // Always ensure theme class is set
+    document.documentElement.classList.add('easter-theme');
+    
+    // Create floating Easter eggs
+    const eggContainer = document.createElement('div');
+    eggContainer.className = 'easter-eggs';
+    document.body.appendChild(eggContainer);
+    
+    const eggEmojis = ['🥚', '🐣', '🐰'];
+    for (let i = 0; i < 30; i++) {
+        const egg = document.createElement('div');
+        egg.className = 'easter-egg';
+        egg.textContent = eggEmojis[Math.floor(Math.random() * eggEmojis.length)];
+        egg.style.left = Math.random() * 100 + '%';
+        egg.style.animationDelay = Math.random() * 3 + 's';
+        egg.style.animationDuration = (Math.random() * 4 + 6) + 's';
+        eggContainer.appendChild(egg);
+    }
+    
+    // Add festive emoji to titles
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle && !heroTitle.textContent.includes('🐰')) {
+        heroTitle.textContent = '🐰 ' + heroTitle.textContent + ' 🐰';
+    }
+    
+    const sectionTitles = document.querySelectorAll('.section-title');
+    const emojis = ['🌷', '🥚', '🐣'];
+    sectionTitles.forEach((title, idx) => {
+        const emoji = emojis[idx % emojis.length];
+        if (!title.textContent.includes(emoji)) {
+            title.textContent = emoji + ' ' + title.textContent + ' ' + emoji;
+        }
+    });
+}
+
+// Wait for DOM to be fully loaded before init
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEasterTheme);
+} else {
+    initEasterTheme();
+}
+
+// Re-check every 5 seconds to keep eggs alive if needed
+setInterval(() => {
+    if (document.querySelector('.easter-eggs') === null) {
+        initEasterTheme();
+    }
+}, 5000);
+
 // 🪶 Mobile menu toggle
 function initMobileMenu() {
     const toggle = document.getElementById('mobileMenuToggle');

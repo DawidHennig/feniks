@@ -10,6 +10,59 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 🐰 Easter Theme Variables */
+.easter-theme {
+    --accent-pastel-pink: #f472b6;
+    --accent-pastel-yellow: #fcd34d;
+    --accent-pastel-blue: #93c5fd;
+    --accent-pastel-green: #86efac;
+}
+
+/* 🐰 Easter Egg Animation */
+@keyframes easterFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes easterBounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.1);
+    }
+}
+
+.easter-eggs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.easter-egg {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.8;
+    animation: easterFloat linear forwards, easterBounce ease-in-out 2s infinite;
+    filter: drop-shadow(0 0 8px rgba(244, 114, 182, 0.4));
+}
+
 /* ===== CUSTOM SCROLLBAR ===== */
 /* Hide scrollbar but keep functionality */
 /* Webkit browsers (Chrome, Safari, Edge) */
@@ -448,6 +501,28 @@ body {
     background-color: var(--accent-red);
     color: var(--white);
     border-color: var(--accent-red-hover);
+}
+
+/* 🐰 Easter CTA Button Overrides */
+.easter-theme .cta-primary {
+    background-color: var(--accent-pastel-pink);
+    color: var(--white);
+}
+
+.easter-theme .cta-primary:hover {
+    background-color: var(--accent-pastel-yellow);
+    color: #333;
+}
+
+.easter-theme .cta-secondary {
+    color: var(--accent-pastel-pink);
+    border-color: var(--accent-pastel-pink);
+}
+
+.easter-theme .cta-secondary:hover {
+    background-color: var(--accent-pastel-blue);
+    color: #333;
+    border-color: var(--accent-pastel-blue);
 }
 
 /* ===== SEKCJE ===== */
